@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var itemType: UILabel!
     @IBOutlet weak var itemId: UILabel!
     @IBOutlet weak var itemDescription: UILabel!
+    @IBOutlet weak var toolbar: UIToolbar!
 
     var detailItem: AnyObject? {
         didSet {
@@ -28,6 +29,10 @@ class DetailViewController: UIViewController {
             self.itemId?.text = detail.valueForKey("itemId").description
             self.itemDescription?.text = detail.valueForKey("itemDescription").description
         }
+//        if let tb = self.toolbar? {
+//            tb.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+//            tb.setNeedsLayout()
+//        }
     }
 
     override func viewDidLoad() {
