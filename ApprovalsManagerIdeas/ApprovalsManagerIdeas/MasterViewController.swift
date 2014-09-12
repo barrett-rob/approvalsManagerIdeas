@@ -85,7 +85,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
         let n = sectionInfo.numberOfObjects
-        return "(\(n) objects)"
+        return "(\(n) items requiring approval)"
     }
         
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
