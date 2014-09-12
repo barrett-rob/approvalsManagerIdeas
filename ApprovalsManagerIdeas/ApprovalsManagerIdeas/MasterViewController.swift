@@ -127,6 +127,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
         cell.textLabel?.text = object.valueForKey("itemId")!.description
         cell.detailTextLabel?.text = object.valueForKey("itemDescription")!.description
+        let itemType = object.valueForKey("itemType")!.description
+        if itemType == "Leave Request" {
+            cell.imageView?.image = UIImage(named: "leave_request_icon.png")
+        } else if itemType == "Invoice" {
+            cell.imageView?.image = UIImage(named: "invoice_icon.png")
+        }
     }
 
     // MARK: - Fetched results controller
