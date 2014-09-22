@@ -29,10 +29,8 @@ class DetailViewController: UIViewController {
             self.itemId?.text = detail.valueForKey("itemId").description
             self.itemDescription?.text = detail.valueForKey("itemDescription").description
         }
-//        if let tb = self.toolbar? {
-//            tb.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
-//            tb.setNeedsLayout()
-//        }
+        if let tb = self.toolbar? {
+        }
     }
 
     override func viewDidLoad() {

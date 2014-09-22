@@ -24,12 +24,14 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
         self.navigationItem.rightBarButtonItem = addButton
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
         let controllers = self.splitViewController!.viewControllers
         self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSForegroundColorAttributeName: UIColor.whiteColor() ]
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 123.0/255.0, green: 151.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
 
     override func didReceiveMemoryWarning() {

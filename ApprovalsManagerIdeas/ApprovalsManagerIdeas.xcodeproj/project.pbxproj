@@ -349,6 +349,7 @@
 				INFOPLIST_FILE = ApprovalsManagerIdeas/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -359,6 +360,7 @@
 				INFOPLIST_FILE = ApprovalsManagerIdeas/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -415,6 +417,7 @@
 				A1E81DF219C1244300D28ADF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A1E81DF319C1244300D28ADF /* Build configuration list for PBXNativeTarget "ApprovalsManagerIdeasTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +426,7 @@
 				A1E81DF519C1244300D28ADF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

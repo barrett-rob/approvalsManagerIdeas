@@ -11,28 +11,17 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="100"
-   height="100"
+   width="30"
+   height="30"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
    sodipodi:docname="leave_request_icon.svg"
    inkscape:export-filename="/Users/robertb/gitclones/xcode/images/leave_request_icon.png"
-   inkscape:export-xdpi="39.360687"
-   inkscape:export-ydpi="39.360687">
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
-    <linearGradient
-       id="linearGradient5286">
-      <stop
-         id="stop5288"
-         offset="0"
-         style="stop-color:#ffffff;stop-opacity:1;" />
-      <stop
-         id="stop5290"
-         offset="1"
-         style="stop-color:#ed8e8e;stop-opacity:1" />
-    </linearGradient>
     <linearGradient
        id="linearGradient5272">
       <stop
@@ -62,19 +51,10 @@
        y2="725.19403"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.85329027,0,0,0.43904492,29.526155,-1078.7964)" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5286"
-       id="linearGradient5284"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.92594961,0,0,0.54003921,14.905634,369.48837)"
-       x1="184.71385"
-       y1="809.62457"
-       x2="184.9133"
-       y2="800.08344" />
     <filter
        inkscape:collect="always"
-       id="filter5344">
+       id="filter5344"
+       color-interpolation-filters="sRGB">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="0.96"
@@ -88,9 +68,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="10.83"
-     inkscape:cx="49.907664"
-     inkscape:cy="50"
+     inkscape:zoom="1"
+     inkscape:cx="14.897508"
+     inkscape:cy="14.927077"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -120,43 +100,34 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-153.78125,-715.71875)">
-    <rect
-       ry="19.061863"
-       y="716.71875"
-       x="154.78125"
-       height="96"
-       width="96"
-       id="rect5338"
-       style="fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter5344)" />
+     transform="translate(-153.78125,-785.71875)">
     <rect
        style="fill:#e24949;fill-opacity:1;stroke:none"
        id="rect3786"
-       width="96"
-       height="96"
+       width="29.795015"
+       height="29.795015"
        x="153.78125"
-       y="715.71875"
-       ry="19.061863" />
-    <rect
-       ry="14.166654"
-       y="-761.58075"
-       x="160.78125"
-       height="38.936367"
-       width="82"
-       id="rect5262"
-       style="opacity:0.66600001;fill:url(#linearGradient5278);fill-opacity:1;stroke:none"
-       transform="scale(1,-1)" />
+       y="785.89417"
+       ry="5.9161301" />
     <text
        xml:space="preserve"
-       style="font-size:85.09439231px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Cambria;-inkscape-font-specification:Cambria"
-       x="168.47726"
-       y="767.28479"
+       style="font-size:24.93289566px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Cambria;-inkscape-font-specification:Cambria"
+       x="163.45547"
+       y="777.26056"
        id="text3782"
        sodipodi:linespacing="125%"
-       transform="scale(0.96034271,1.0412949)"><tspan
+       transform="scale(0.96034274,1.0412949)"><tspan
          sodipodi:role="line"
          id="tspan5336"
-         x="168.47726"
-         y="767.28479">Lr</tspan></text>
+         x="163.45547"
+         y="777.26056">Lr</tspan></text>
+    <rect
+       ry="5.1050177"
+       y="787.84595"
+       x="155.84079"
+       height="25.710062"
+       width="25.710062"
+       id="rect3007"
+       style="fill:none;stroke:#ffffff;stroke-width:1.73793817;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
   </g>
 </svg>
