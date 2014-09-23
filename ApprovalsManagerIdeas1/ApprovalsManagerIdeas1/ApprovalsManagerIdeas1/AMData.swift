@@ -19,6 +19,8 @@ class AMData {
             rec.itemType = itemTypes[m]
             rec.itemId = String(format: "%05i", arguments: [i])
             rec.itemDescription = "Please approve this " + rec.itemType!
+            let v = arc4random_uniform(1000)
+            rec.value = NSDecimalNumber(double: Double(v) / 10)
             addRecord(rec)
         }
     }

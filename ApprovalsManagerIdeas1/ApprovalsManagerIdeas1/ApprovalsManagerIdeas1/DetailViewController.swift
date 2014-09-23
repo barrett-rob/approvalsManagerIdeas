@@ -30,6 +30,11 @@ class DetailViewController: UITableViewController {
             let record = records[indexPath.row]
             cell.textLabel?.text = record.itemId
             cell.detailTextLabel?.text = record.itemDescription
+            if let amountTextLabel = cell.viewWithTag(2) as? UILabel {
+                if let v = record.value {
+                    amountTextLabel.text = String(format: "%.2f", arguments: [ v.doubleValue ])
+                }
+            }
         }
         return cell
     }

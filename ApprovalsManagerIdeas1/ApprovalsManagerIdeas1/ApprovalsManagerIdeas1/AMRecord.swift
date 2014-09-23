@@ -10,6 +10,7 @@ import Foundation
 
 class AMRecord {
     var itemType, itemId, itemDescription: String?
+    var value: NSDecimalNumber?
     init() {
     }
 }
