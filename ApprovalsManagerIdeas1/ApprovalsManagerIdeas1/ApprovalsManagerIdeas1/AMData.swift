@@ -9,11 +9,14 @@
 import Foundation
 
 class AMData {
+    let itemTypes = [ "Contract Variation", "Leave Request", "Non Order Invoice"]
     var records: [AMRecord]?
     init() {
-        for i in 1...10 {
+        var n = itemTypes.count * 5
+        for i in 1...n {
             let rec = AMRecord()
-            rec.itemType = "Leave Request"
+            let m = i % itemTypes.count
+            rec.itemType = itemTypes[m]
             rec.itemId = String(format: "3", arguments: [i])
             rec.itemDescription = "Please approve this " + rec.itemType!
             addRecord(rec)

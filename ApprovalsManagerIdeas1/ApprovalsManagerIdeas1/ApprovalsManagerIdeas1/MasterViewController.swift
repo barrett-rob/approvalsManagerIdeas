@@ -25,7 +25,7 @@ class MasterViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
+        
         // let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
         // self.navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
@@ -37,6 +37,8 @@ class MasterViewController: UITableViewController {
                 self.data = AMData()
                 self.detailViewController!.data = self.data
             }
+            // adjust toolbar height?
+            // put the settings icon on the settings button
         }
     }
 
@@ -75,8 +77,9 @@ class MasterViewController: UITableViewController {
         let keys = Array(itemTypes.keys)
         if keys.count > indexPath.row {
             let key = keys[indexPath.row]
-            let n = itemTypes[key]
-            cell.textLabel?.text = "\(key) (\(n))"
+            let n = itemTypes[key]!
+            cell.textLabel?.text = key
+            cell.detailTextLabel?.text = "\(n.description)"
         }
         return cell
     }
