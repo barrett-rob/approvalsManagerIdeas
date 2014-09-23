@@ -8,29 +8,30 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UITableViewController {
 
     var data: AMData!
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
+    var itemType: String?
 
-    var detailItem: AnyObject? {
-        didSet {
-            self.configureView()
+    // MARK: - Table View
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1 // for now
+    }
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.getRecords(itemType).count
+    }
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("itemIdCell", forIndexPath: indexPath) as UITableViewCell
+        let records = data.getRecords(itemType)
+        if records.count > indexPath.row {
+            let record = records[indexPath.row]
+            cell.textLabel?.text = record.itemId
+            cell.detailTextLabel?.text = record.itemDescription
         }
+        return cell
     }
-
-    func configureView() {
-        if let detail: AnyObject = self.detailItem {
-            if let label = self.detailDescriptionLabel {
-                label.text = detail.description
-            }
-        }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.configureView()
-    }
-
 }
 

@@ -10,7 +10,7 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: DetailViewController! = nil
     var data: AMData! = nil
 
     override func awakeFromNib() {
@@ -23,22 +23,13 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        // self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        
-        // let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        // self.navigationItem.rightBarButtonItem = addButton
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
-            // get a reference to the data model
-            if self.data == nil {
-                // init data
-                self.data = AMData()
-                self.detailViewController!.data = self.data
-            }
-            // adjust toolbar height?
-            // put the settings icon on the settings button
+        let controllers = self.splitViewController!.viewControllers
+        let detailNavigationController = controllers[1] as UINavigationController
+        self.detailViewController = detailNavigationController.topViewController as DetailViewController
+        if self.data == nil {
+            self.data = AMData() // inits some data
+            // set a reference to the data
+            self.detailViewController!.data = self.data
         }
     }
 
@@ -53,8 +44,8 @@ class MasterViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
-//                let object = objects[indexPath.row] as NSDate
-//                controller.detailItem = object
+                controller.data = self.data
+                controller.itemType = getItemType(indexPath.row)
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -72,21 +63,24 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("itemTypeCell", forIndexPath: indexPath) as UITableViewCell
         let itemTypes = data.getItemTypes()
-        let keys = Array(itemTypes.keys)
-        if keys.count > indexPath.row {
-            let key = keys[indexPath.row]
-            let n = itemTypes[key]!
-            cell.textLabel?.text = key
+        if let itemType = getItemType(indexPath.row)? {
+            let n = itemTypes[itemType]!
+            cell.textLabel?.text = itemType
             cell.detailTextLabel?.text = "\(n.description)"
         }
         return cell
     }
 
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func getItemType(row: Int) -> String? {
+        let itemTypes = data.getItemTypes()
+        let keys = Array(itemTypes.keys)
+        if keys.count > row {
+            let key = keys[row]
+            return key
+        }
+        return nil
     }
 }
 

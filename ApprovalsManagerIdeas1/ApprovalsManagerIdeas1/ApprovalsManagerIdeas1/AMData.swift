@@ -17,7 +17,7 @@ class AMData {
             let rec = AMRecord()
             let m = i % itemTypes.count
             rec.itemType = itemTypes[m]
-            rec.itemId = String(format: "3", arguments: [i])
+            rec.itemId = String(format: "%05i", arguments: [i])
             rec.itemDescription = "Please approve this " + rec.itemType!
             addRecord(rec)
         }
@@ -30,9 +30,15 @@ class AMData {
         }
         records!.append(rec)
     }
-    func getRecords(itemType: String) -> [AMRecord] {
+    func getRecords(itemType: String?) -> [AMRecord] {
         if let rs = records? {
-            return rs.filter({ $0.itemType == itemType })
+            return rs.filter({
+                if let it = itemType? {
+                    return $0.itemType == itemType
+                } else {
+                    return false
+                }
+            })
         } else {
             return [AMRecord]();
         }
