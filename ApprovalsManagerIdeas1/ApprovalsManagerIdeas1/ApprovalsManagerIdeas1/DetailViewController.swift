@@ -33,6 +33,8 @@ class DetailViewController: UITableViewController {
             if let amountTextLabel = cell.viewWithTag(2) as? UILabel {
                 if let v = record.value {
                     amountTextLabel.text = String(format: "$%.2f", arguments: [ v.doubleValue ])
+                    // put this label at the right of the cell using constraints
+                    cell.addConstraint(NSLayoutConstraint(item: amountTextLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -25))
                 }
             }
         }
