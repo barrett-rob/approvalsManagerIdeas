@@ -31,10 +31,7 @@
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
       'app.js',
-      'home/home.js',
-      'components/version/version.js',
-      'components/version/version-directive.js',
-      'components/version/interpolate-filter.js'
+      'home/home.js'
     ], function() {
       // when all is done, execute bootstrap angular application
       angular.bootstrap(document, ['myApp']);
@@ -47,10 +44,7 @@
   <ul class="menu">
     <li><a href="#/home">home</a></li>
   </ul>
-
   <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
-
+  <div>Powered by Ventyx Pty Ltd. Approvals Manager version 0.1</div>
 </body>
 </html>
