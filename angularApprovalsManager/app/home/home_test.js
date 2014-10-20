@@ -1,8 +1,8 @@
 'use strict';
 
-describe('myApp.home module', function() {
+describe('approvalsManager.home module', function() {
 
-  beforeEach(module('myApp.home'));
+  beforeEach(module('approvalsManager.home'));
 
   describe('home controller', function(){
 
