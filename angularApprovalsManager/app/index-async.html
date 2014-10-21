@@ -30,11 +30,11 @@
     $script([
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
+      'x2js/xml2json.js',
       'app.js',
       'home/home.js',
-      'ria/HttpService.js',
       'ria/URLService.js',
-      'x2js/xml2json.js'
+      'ria/HttpService.js'
     ], function() {
       // when all is done, execute bootstrap angular application
       angular.bootstrap(document, ['approvalsManager']);

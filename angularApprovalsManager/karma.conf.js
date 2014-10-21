@@ -7,14 +7,17 @@ module.exports = function(config){
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
-      'app/home/**/*.js'
+      'app/x2js/*.js',
+      'app/home/*.js',
+      'app/ria/*.js',
     ],
 
     autoWatch : true,
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome', 'Safari'],
+    browsers : ['Chrome'],
+    //browsers : ['Chrome', 'Safari'],
 
     plugins : [
             'karma-chrome-launcher',

@@ -25,9 +25,11 @@ describe('HttpService tests', function() {
 			expect(login).toBeDefined()
 			// assertions for good login
 			httpBackend.whenPOST().respond(CANNED_LOGIN_RESPONSE_0)
-			var response = login({})
+			var successCallback = function(response) {
+				expect(response.data.connectionId).toBeDefined()
+			}
+			var response = login({}, successCallback)
 			httpBackend.flush()
-			expect(response.actions).toBeDefined()
 			// assertions for bad login
 		})
 
