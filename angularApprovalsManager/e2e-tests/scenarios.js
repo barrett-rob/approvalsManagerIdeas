@@ -30,6 +30,12 @@ describe('approvalsManager e2e tests', function() {
 
         it('should render settings view when user navigates to /settings', function() {
             expect(browser.getLocationAbsUrl()).toMatch("/settings")
+            expect(element(by.model('url'))).toBeDefined()
+            expect(element(by.model('username'))).toBeDefined()
+            expect(element(by.model('password'))).toBeDefined()
+            expect(element(by.model('district'))).toBeDefined()
+            expect(element(by.model('position'))).toBeDefined()
+            expect(element(by.model('employeeId'))).toBeDefined()
         })
 
     })

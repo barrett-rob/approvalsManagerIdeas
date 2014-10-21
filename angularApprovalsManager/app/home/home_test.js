@@ -8,7 +8,7 @@ describe('approvalsManager.home module', function() {
 
     it('should ....', inject(function($controller) {
       //spec body
-      var homeCtrl = $controller('homeCtrl');
+      var homeCtrl = $controller('homeController');
       expect(homeCtrl).toBeDefined();
     }));
 

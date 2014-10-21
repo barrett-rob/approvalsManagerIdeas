@@ -4,8 +4,8 @@ angular.module('approvalsManager.home', ['ngRoute', 'HttpService'])
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/home', {
 		templateUrl: 'home/home.html',
-		controller: 'homeCtrl'
+		controller: 'homeController'
 	});
 }])
-.controller('homeCtrl', [function() {
+.controller('homeController', [function() {
 }]);

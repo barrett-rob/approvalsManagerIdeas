@@ -7,7 +7,7 @@ describe('approvalsManager.settings module', function() {
 	describe('settings controller', function(){
 
 		it('should ....', inject(function($controller) {
-			var ctrlr = $controller('SettingsController');
+			var ctrlr = $controller('settingsController');
 			expect(ctrlr).toBeDefined();
 		}));
 
