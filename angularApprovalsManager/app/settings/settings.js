@@ -7,6 +7,12 @@ angular.module('approvalsManager.settings', ['ngRoute'])
 		controller: 'settingsController'
 	});
 }])
-.controller('settingsController', [function() {
-
-}]);
+.controller('settingsController', [ '$scope', function($scope) {
+	// TODO: get credentials from local storage
+	$scope.url = 'http://ellipseonlineb0-el8dev-epsprd2-eps-prod.techops.ventyx.abb.com:8080/ria'
+	$scope.username = 'AM2122'
+	$scope.password = ''
+	$scope.position = ''
+	$scope.district = 'R100'
+	$scope.employeeId = 'NINES'
+}])

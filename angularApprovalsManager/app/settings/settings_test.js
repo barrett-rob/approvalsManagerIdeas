@@ -6,9 +6,16 @@ describe('approvalsManager.settings module', function() {
 
 	describe('settings controller', function(){
 
-		it('should ....', inject(function($controller) {
-			var ctrlr = $controller('settingsController');
+		it('should ....', inject(function($controller, $rootScope) {
+			var scope = $rootScope.$new()
+			var ctrlr = $controller('settingsController', { $scope: scope });
 			expect(ctrlr).toBeDefined();
+			expect(scope.url).toBeDefined()
+			expect(scope.username).toBeDefined()
+			expect(scope.password).toBeDefined()
+			expect(scope.district).toBeDefined()
+			expect(scope.position).toBeDefined()
+			expect(scope.employeeId).toBeDefined()
 		}));
 
 	});
