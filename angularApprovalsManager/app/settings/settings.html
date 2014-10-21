@@ -1,9 +1,9 @@
-<div ng-form ng-submit="validate">
+<div ng-form>
 	<div><label>Ellipse URL:</label><input type="text" name="url" ng-model="url" required></div>
 	<div><label>User Name:</label><input type="text" name="username" ng-model="username" required></div>
 	<div><label>Password:</label><input type="password" name="password" ng-model="password" required></div>
 	<div><label>District:</label><input type="text" name="district" ng-model="district"></div>
 	<div><label>Position:</label><input type="text" name="position" ng-model="position"></div>
 	<div><label>Employee Id:</label><input type="text" name="employeeId" ng-model="employeeId"></div>
-	<div><input type="submit" value="Validate"></div>
+	<div><button ng-click="validate()">Validate</button></div>
 </div>
