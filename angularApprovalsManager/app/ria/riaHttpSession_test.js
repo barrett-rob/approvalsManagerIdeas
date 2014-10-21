@@ -18,12 +18,12 @@ describe('riaHttpSession tests', function() {
 			login = _login_
 		}))
 
-		it('login tests...', inject(function(_$controller_, _$httpBackend_, $rootScope, login) {
+		it('login tests...', function() {
 			expect(scope).toBeDefined()
 			expect(controller).toBeDefined()
 			expect(httpBackend).toBeDefined()
 			expect(login).toBeDefined()
-		}))
+		})
 
 	})
 })
