@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('approvalsManager.home', ['ngRoute'])
+angular.module('approvalsManager.home', ['ngRoute', 'riaHttpSession'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/home', {
