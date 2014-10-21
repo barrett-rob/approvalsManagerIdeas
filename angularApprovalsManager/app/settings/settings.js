@@ -15,4 +15,7 @@ angular.module('approvalsManager.settings', ['ngRoute'])
 	$scope.position = ''
 	$scope.district = 'R100'
 	$scope.employeeId = 'NINES'
+	$scope.validate = function() {
+		
+	}
 }])
