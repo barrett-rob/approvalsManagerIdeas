@@ -1,14 +1,11 @@
 'use strict';
 
 angular.module('approvalsManager.home', ['ngRoute', 'HttpService'])
-
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/home', {
-    templateUrl: 'home/home.html',
-    controller: 'homeCtrl'
-  });
+	$routeProvider.when('/home', {
+		templateUrl: 'home/home.html',
+		controller: 'homeCtrl'
+	});
 }])
-
 .controller('homeCtrl', [function() {
-
 }]);

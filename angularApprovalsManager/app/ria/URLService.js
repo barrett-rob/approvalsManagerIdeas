@@ -1,3 +1,5 @@
+'use strict'
+
 // ria URL service
 
 angular.module('URLService', [])
