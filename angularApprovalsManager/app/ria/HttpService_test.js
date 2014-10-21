@@ -7,6 +7,31 @@ describe('HttpService tests', function() {
 	beforeEach(module('URLService'))
 	beforeEach(module('HttpService'))
 
+	describe('poke tests', function() {
+
+		var poke, setUrl
+		beforeEach(inject(function(_poke_, _setUrl_) {
+			poke = _poke_
+			setUrl = _setUrl_
+		}))
+
+		it('poke tests...', function() {
+			expect(poke).toBeDefined()
+			expect(setUrl).toBeDefined()
+			setUrl('http://google.com')
+			var pokeSuccess = function(success) {
+				expect(success).toBeTruthy()
+			}
+			poke(pokeSuccess)
+			setUrl('http://bogus.u.r.l')
+			var pokeFail = function(success) {
+				expect(success).toBeTruthy()
+			}
+			poke(pokeFail)
+		})
+
+	})
+
 	describe('login tests', function() {
 
 		var scope, controller, httpBackend, login

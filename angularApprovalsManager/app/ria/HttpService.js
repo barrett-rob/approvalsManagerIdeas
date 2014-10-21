@@ -5,11 +5,12 @@
 angular.module('HttpService', [ 'URLService' ])
 .factory('login', [ '$http', 'getUrl', function($http, getUrl) {
 	return function(args, successCallback, errorCallback) {
-		// get credentials
+		// get credentials from args
 		// create interaction object
 		var interaction = {}
 		// execute post
-		$http.post(getUrl(), interaction)
+		var url = getUrl()
+		$http.post(url, interaction)
 		.success(function(data, status, headers, config) {
 	  		// populate response object
 			var x2js = new X2JS()
@@ -24,6 +25,23 @@ angular.module('HttpService', [ 'URLService' ])
 			// populate error messages
 			if (errorCallback) {
 				errorCallback('foo')
+			}
+		})
+	}
+}])
+.factory('poke', [ '$http', 'getUrl', function($http, getUrl) {
+	return function(pokeCallback) {
+		// GET url
+		var url = getUrl()
+		$http.get(url)
+		.success(function(data, status, headers, config) {
+	 		if (pokeCallback) {
+	 			pokeCallback(true)
+	 		}
+		})
+		.error(function(data, status, headers, config) {
+			if (pokeCallback) {
+				pokeCallback(false)
 			}
 		})
 	}
