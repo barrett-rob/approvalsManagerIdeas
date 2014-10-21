@@ -2,28 +2,28 @@
 
 // ria http service unit tests
 
-describe('HttpService tests', function() {
+describe('RIAHttpService tests', function() {
 
-	beforeEach(module('URLService'))
-	beforeEach(module('HttpService'))
+	beforeEach(module('RIASettingsService'))
+	beforeEach(module('RIAHttpService'))
 
 	describe('poke tests', function() {
 
-		var poke, setUrl
-		beforeEach(inject(function(_poke_, _setUrl_) {
+		var poke, setSettings
+		beforeEach(inject(function(_poke_, _setSettings_) {
 			poke = _poke_
-			setUrl = _setUrl_
+			setSettings = _setSettings_
 		}))
 
 		it('poke tests...', function() {
 			expect(poke).toBeDefined()
-			expect(setUrl).toBeDefined()
-			setUrl('http://google.com')
+			expect(setSettings).toBeDefined()
+			//setUrl('http://google.com')
 			var pokeSuccess = function(success) {
 				expect(success).toBeTruthy()
 			}
 			poke(pokeSuccess)
-			setUrl('http://bogus.u.r.l')
+			//setUrl('http://bogus.u.r.l')
 			var pokeFail = function(success) {
 				expect(success).toBeTruthy()
 			}
@@ -53,7 +53,7 @@ describe('HttpService tests', function() {
 			var successCallback = function(response) {
 				expect(response.data.connectionId).toBeDefined()
 			}
-			var response = login({}, successCallback)
+			var response = login(successCallback)
 			httpBackend.flush()
 			// assertions for bad login
 		})

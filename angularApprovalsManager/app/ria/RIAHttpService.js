@@ -2,14 +2,14 @@
 
 // ria http service
 
-angular.module('HttpService', [ 'URLService' ])
-.factory('login', [ '$http', 'getUrl', function($http, getUrl) {
-	return function(args, successCallback, errorCallback) {
+angular.module('RIAHttpService', [ 'RIASettingsService' ])
+.factory('login', [ '$http', 'getSettings', function($http, getSettings) {
+	return function(successCallback, errorCallback) {
 		// get credentials from args
 		// create interaction object
 		var interaction = {}
 		// execute post
-		var url = getUrl()
+		var url = getSettings().url
 		$http.post(url, interaction)
 		.success(function(data, status, headers, config) {
 	  		// populate response object
@@ -29,10 +29,9 @@ angular.module('HttpService', [ 'URLService' ])
 		})
 	}
 }])
-.factory('poke', [ '$http', 'getUrl', function($http, getUrl) {
-	return function(pokeCallback) {
-		// GET url
-		var url = getUrl()
+.factory('poke', [ '$http', function($http) {
+	return function(url, pokeCallback) {
+		// perform GET
 		$http.get(url)
 		.success(function(data, status, headers, config) {
 	 		if (pokeCallback) {
