@@ -9,25 +9,27 @@ describe('RIAHttpService tests', function() {
 
 	describe('poke tests', function() {
 
-		var poke, setSettings
-		beforeEach(inject(function(_poke_, _setSettings_) {
+		var poke, setSettings, httpBackend
+		beforeEach(inject(function(_poke_, _setSettings_, _$httpBackend_) {
 			poke = _poke_
 			setSettings = _setSettings_
+			httpBackend = _$httpBackend_
 		}))
 
 		it('poke tests...', function() {
 			expect(poke).toBeDefined()
 			expect(setSettings).toBeDefined()
-			//setUrl('http://google.com')
-			var pokeSuccess = function(success) {
+			expect(httpBackend).toBeDefined()
+			httpBackend.whenGET('http://example.com').respond(200, '') // ok
+			httpBackend.whenGET('http://bogus.com').respond(404, '') // not found
+			poke('http://example.com', function(success) {
 				expect(success).toBeTruthy()
-			}
-			poke(pokeSuccess)
-			//setUrl('http://bogus.u.r.l')
-			var pokeFail = function(success) {
-				expect(success).toBeTruthy()
-			}
-			poke(pokeFail)
+			})
+			httpBackend.flush()
+			poke('http://bogus.com', function(success) {
+				expect(success).toBeFalsy()
+			})
+			httpBackend.flush()
 		})
 
 	})
