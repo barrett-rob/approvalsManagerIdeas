@@ -8,14 +8,8 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIASettingsService', '
 	});
 }])
 .controller('settingsController', [ '$scope', 'poke', 'getSettings', 'setSettings', 'login', function($scope, poke, getSettings, setSettings, login) {
-	var settings = getSettings()
-	// TODO: get credentials from local storage
-	$scope.url = settings.url
-	$scope.username = settings.username
-	$scope.password = settings.password
-	$scope.position = settings.position
-	$scope.district = settings.district
-	$scope.employeeId = settings.employeeId
+	var oldsettings = getSettings()
+	$scope.settings = oldsettings
 	// set up alerts
 	$scope.alerts = [ { type: 'success', msg: "Don't forget validate your settings." } ]
 	$scope.validate = function() {
@@ -26,6 +20,20 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIASettingsService', '
 			if (success) {
 				console.log('url is valid: ' + url + ', checking login')
 				$scope.alerts = [ { type: 'success', msg: 'Ellipse URL is valid.' } ]
+				// validate credentials
+				var newettings = {}
+				angular.copy($scope.settings, newsettings)
+				setSettings(newettings)
+				login(
+					function() {
+						// if login worked
+						// else 
+					}, 
+					function() {
+						// old settings remain
+						setSettings(settings)
+					}
+				)
 			} else {
 				console.log('url is NOT valid: ' + url)
 				$scope.settingsForm.url.$invalid = true

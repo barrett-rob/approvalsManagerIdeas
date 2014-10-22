@@ -4,23 +4,50 @@
 
 angular.module('RIAHttpService', [ 'RIASettingsService' ])
 .config(function() {
-	self.interaction = function(application) {
+	self.createInteraction = function(
+		application, // string
+		actions // array of action (see self.createAction)
+		) {
 		// set up interaction object
-		var interaction = { 'application': application }
-		return interaction
+		var interaction = { 
+			'actions': actions, 
+			'application': application, 
+			'applicationPage': undefined
+		}
+		return { 'interaction': interaction }
+	}
+	self.createAction = function(
+		name, // string
+		data // object
+		) {
+		var action = { 
+			'name': name,
+			'data': data
+		}
+		return { 'action': action }
 	}
 })
 .factory('login', [ '$http', 'getSettings', function($http, getSettings) {
 	return function(successCallback, errorCallback) {
-		// get credentials from args
-		// create interaction object
-		var interaction = self.interaction('RIAHttpService')
+		// get credentials
+		var settings = getSettings()
+		// construct interaction object
+		var data = {
+			'username': settings.username,
+			'password': settings.password,
+			'scope': settings.district,
+			'position': settings.position,
+			'rememberMe': 'N',
+		}
+		var action = self.createAction('login', data)
+		var interaction = self.createInteraction('login', [ action ])
+		var x2js = new X2JS()
+		var xml = x2js.json2xml_str(interaction)
 		// execute post
-		var url = getSettings().url
-		$http.post(url, interaction)
+		var url = settings.url
+		$http.post(url, xml)
 		.success(function(data, status, headers, config) {
 	  		// populate response object
-			var x2js = new X2JS()
 			var json = x2js.xml_str2json(data)
 	  		var response = json.interaction.actions.action
 			// initialise messages
@@ -35,7 +62,7 @@ angular.module('RIAHttpService', [ 'RIASettingsService' ])
 		.error(function(data, status, headers, config) {
 			// populate error messages
 			if (errorCallback) {
-				errorCallback('foo')
+				errorCallback(status)
 			}
 		})
 	}
