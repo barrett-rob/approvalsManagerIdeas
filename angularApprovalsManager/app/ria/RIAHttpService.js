@@ -3,11 +3,18 @@
 // ria http service
 
 angular.module('RIAHttpService', [ 'RIASettingsService' ])
+.config(function() {
+	self.interaction = function(application) {
+		// set up interaction object
+		var interaction = { 'application': application }
+		return interaction
+	}
+})
 .factory('login', [ '$http', 'getSettings', function($http, getSettings) {
 	return function(successCallback, errorCallback) {
 		// get credentials from args
 		// create interaction object
-		var interaction = {}
+		var interaction = self.interaction('RIAHttpService')
 		// execute post
 		var url = getSettings().url
 		$http.post(url, interaction)
@@ -16,7 +23,11 @@ angular.module('RIAHttpService', [ 'RIASettingsService' ])
 			var x2js = new X2JS()
 			var json = x2js.xml_str2json(data)
 	  		var response = json.interaction.actions.action
-	 		// populate messages
+			// initialise messages
+			var messages = response.messages
+			if (!messages || messages == '') {
+				response.messages = {}
+			}
 	 		if (successCallback) {
 	 			successCallback(response)
 	 		}

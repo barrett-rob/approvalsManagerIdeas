@@ -54,6 +54,8 @@ describe('RIAHttpService tests', function() {
 			httpBackend.whenPOST().respond(SUCCESFUL_LOGIN_RESPONSE)
 			var successCallback = function(response) {
 				expect(response.data.connectionId).toBeDefined()
+				expect(response.messages).toBeDefined()
+				expect(response.messages).toEqual({})
 			}
 			var response = login(successCallback)
 			httpBackend.flush()
