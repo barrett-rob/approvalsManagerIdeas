@@ -9,7 +9,7 @@ exports.config = {
     'browserName': 'chrome'
   },
 
-  baseUrl: 'http://localhost:8080/mobileApprovalsManager/',
+  baseUrl: 'http://localhost:8080/MobileApprovalsManager/',
 
   framework: 'jasmine',
 
