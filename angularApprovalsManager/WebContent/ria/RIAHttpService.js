@@ -2,7 +2,7 @@
 
 // ria http service
 
-angular.module('RIAHttpService', [ 'RIASettingsService' ])
+angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 .config(function() {
 	self.createInteraction = function(
 		application, // string
@@ -27,16 +27,15 @@ angular.module('RIAHttpService', [ 'RIASettingsService' ])
 		return { 'action': action }
 	}
 })
-.factory('login', [ '$http', 'getSettings', function($http, getSettings) {
+.factory('login', [ '$http', 'getCredentials', 'getUrl', function($http, getCredentials, getUrl) {
 	return function(successCallback, errorCallback) {
-		// get credentials
-		var settings = getSettings()
+		var credentials = getCredentials()
 		// construct interaction object
 		var data = {
-			'username': settings.username,
-			'password': settings.password,
-			'scope': settings.district,
-			'position': settings.position,
+			'username': credentials.username,
+			'password': credentials.password,
+			'scope': credentials.district,
+			'position': credentials.position,
 			'rememberMe': 'N',
 		}
 		var action = self.createAction('login', data)
@@ -44,7 +43,7 @@ angular.module('RIAHttpService', [ 'RIASettingsService' ])
 		var x2js = new X2JS()
 		var xml = x2js.json2xml_str(interaction)
 		// execute post
-		var url = settings.url
+		var url = getUrl()
 		$http.post(url, xml)
 		.success(function(data, status, headers, config) {
 	  		// populate response object

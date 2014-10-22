@@ -4,13 +4,14 @@
 
 describe('RIAHttpService tests', function() {
 
-	beforeEach(module('RIASettingsService'))
+	beforeEach(module('RIAURLService'))
+	beforeEach(module('RIACredentialsService'))
 	beforeEach(module('RIAHttpService'))
 
 	describe('poke tests', function() {
 
 		var poke, httpBackend
-		beforeEach(inject(function(_poke_, _setSettings_, _$httpBackend_) {
+		beforeEach(inject(function(_poke_, _$httpBackend_) {
 			poke = _poke_
 			httpBackend = _$httpBackend_
 		}))
@@ -38,15 +39,17 @@ describe('RIAHttpService tests', function() {
 
 	describe('login tests', function() {
 
-		var scope, controller, httpBackend, login, setSettings, getSettings
+		var scope, controller, httpBackend, login, setCredentials, getCredentials, setUrl, getUrl
 
-		beforeEach(inject(function(_$controller_, _$httpBackend_, $rootScope, _login_, _setSettings_, _getSettings_) {
+		beforeEach(inject(function(_$controller_, _$httpBackend_, $rootScope, _login_, _setCredentials_, _getCredentials_, _setUrl_, _getUrl_) {
 			scope = $rootScope.$new()
 			controller = _$controller_
 			httpBackend = _$httpBackend_
 			login = _login_
-			setSettings = _setSettings_
-			getSettings = _getSettings_
+			setCredentials = _setCredentials_
+			getCredentials = _getCredentials_
+			setUrl = _setUrl_
+			getUrl = _getUrl_
 		}))
 
 		it('successful login response', function() {
@@ -87,14 +90,14 @@ describe('RIAHttpService tests', function() {
 			expect(controller).toBeDefined()
 			expect(httpBackend).toBeDefined()
 			expect(login).toBeDefined()
-			expect(getSettings).toBeDefined()
-			expect(setSettings).toBeDefined()
-			var settings = getSettings()
-			settings.username = 'UNUNUN'
-			settings.password = 'PWPWPW'
-			settings.district = 'DIDIDI'
-			settings.position = 'POPOPO'
-			setSettings(settings)
+			expect(getCredentials).toBeDefined()
+			expect(setCredentials).toBeDefined()
+			var credentials = getCredentials()
+			credentials.username = 'UNUNUN'
+			credentials.password = 'PWPWPW'
+			credentials.district = 'DIDIDI'
+			credentials.position = 'POPOPO'
+			setCredentials(credentials)
 			// assertions for login message
 			httpBackend.expectPOST(undefined, LOGIN_REQUEST, undefined).respond(SUCCESFUL_LOGIN_RESPONSE)
 			var successCallback = function(response) {

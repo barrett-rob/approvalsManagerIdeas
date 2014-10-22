@@ -1,15 +1,20 @@
 'use strict';
 
-angular.module('approvalsManager.settings', [ 'ngRoute', 'RIASettingsService', 'RIAHttpService' ])
+angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACredentialsService', 'RIAHttpService' ])
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/settings', {
 		templateUrl: 'settings/settings.html',
 		controller: 'settingsController'
 	});
 }])
-.controller('settingsController', [ '$scope', 'poke', 'getSettings', 'setSettings', 'login', function($scope, poke, getSettings, setSettings, login) {
-	var oldsettings = getSettings()
-	$scope.settings = oldsettings
+.controller('settingsController', [ '$scope', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'login', function($scope, poke, getCredentials, setCredentials, getUrl, setUrl, login) {
+	var oldcredentials = getCredentials()
+	$scope.credentials = oldcredentials
+	var oldurl = getUrl()
+	$scope.url = oldurl
+	// TODO: implement filters service
+	$scope.filters = []
+	$scope.filters.employeeId = ''
 	// set up alerts
 	$scope.alerts = [ { type: 'success', msg: "Don't forget validate your settings." } ]
 	$scope.validate = function() {
@@ -21,11 +26,11 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIASettingsService', '
 				console.log('url is valid: ' + url + ', checking login')
 				$scope.alerts = [ { type: 'success', msg: 'Ellipse URL is valid.' } ]
 				// validate credentials
-				var newettings = {}
-				angular.copy($scope.settings, newsettings)
-				setSettings(newettings)
+				var newcredentials = {}
+				angular.copy($scope.credentials, newcredentials)
+				setCredentials(newcredentials)
 				login(
-					function() {
+					function(response) {
 						// if login worked
 						// else 
 					}, 
@@ -36,7 +41,6 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIASettingsService', '
 				)
 			} else {
 				console.log('url is NOT valid: ' + url)
-				$scope.settingsForm.url.$invalid = true
 				$scope.alerts = [ { type: 'danger', msg: 'Ellipse URL is not valid.' } ]
 			}
 		}
