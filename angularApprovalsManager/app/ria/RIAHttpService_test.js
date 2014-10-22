@@ -21,8 +21,12 @@ describe('RIAHttpService tests', function() {
 			expect(setSettings).toBeDefined()
 			expect(httpBackend).toBeDefined()
 			httpBackend.whenGET('http://example.com').respond(200, '') // ok
+			httpBackend.whenGET('http://redirect.com').respond(302, '') // moved
 			httpBackend.whenGET('http://bogus.com').respond(404, '') // not found
 			poke('http://example.com', function(success) {
+				expect(success).toBeTruthy()
+			})
+			poke('http://redirect.com', function(success) {
 				expect(success).toBeTruthy()
 			})
 			httpBackend.flush()

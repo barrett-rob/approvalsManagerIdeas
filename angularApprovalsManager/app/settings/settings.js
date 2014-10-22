@@ -7,14 +7,15 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIASettingsService', '
 		controller: 'settingsController'
 	});
 }])
-.controller('settingsController', [ '$scope', 'poke', function($scope, poke) {
+.controller('settingsController', [ '$scope', 'poke', 'getSettings', 'setSettings', function($scope, poke, getSettings, setSettings) {
+	var settings = getSettings()
 	// TODO: get credentials from local storage
-	$scope.url = 'http://ellipseonlineb0-el8dev-epsprd2-eps-prod.techops.ventyx.abb.com:8080/ria'
-	$scope.username = 'AM2122'
-	$scope.password = ''
-	$scope.position = ''
-	$scope.district = 'R100'
-	$scope.employeeId = 'NINES'
+	$scope.url = settings.url
+	$scope.username = settings.username
+	$scope.password = settings.password
+	$scope.position = settings.position
+	$scope.district = settings.district
+	$scope.employeeId = settings.employeeId
 	$scope.validate = function() {
 		console.log('validate')
 		// validate url

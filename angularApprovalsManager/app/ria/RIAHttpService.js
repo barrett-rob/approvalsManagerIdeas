@@ -50,8 +50,13 @@ angular.module('RIAHttpService', [ 'RIASettingsService' ])
 	 		}
 		})
 		.error(function(data, status, headers, config) {
+			var success = false
+			if (status >= 300 && status < 400) {
+				// these are ok too as far as a poke is concerned
+				success = true
+			}
 			if (pokeCallback) {
-				pokeCallback(false)
+				pokeCallback(success)
 			}
 		})
 	}
