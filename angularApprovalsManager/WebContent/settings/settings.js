@@ -22,9 +22,11 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIASettingsService', '
 		var url = $scope.url
 		var pokeCallback = function(success) {
 			if (success) {
-				console.log('url is valid: ' + url)
+				console.log('url is valid: ' + url + ', checking login')
+				$scope.settingsForm.url.$valid = true
 			} else {
 				console.log('url is NOT valid: ' + url)
+				$scope.settingsForm.url.$invalid = true
 			}
 		}
 		poke(url, pokeCallback)
