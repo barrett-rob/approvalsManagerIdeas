@@ -5,6 +5,7 @@ angular.module('approvalsManager', [
 	'ngRoute',
 	'approvalsManager.home',
 	'approvalsManager.settings',
+	'ui.bootstrap',
 	]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.otherwise({redirectTo: 'home'});

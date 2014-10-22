@@ -7,7 +7,7 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIASettingsService', '
 		controller: 'settingsController'
 	});
 }])
-.controller('settingsController', [ '$scope', 'poke', 'getSettings', 'setSettings', function($scope, poke, getSettings, setSettings) {
+.controller('settingsController', [ '$scope', 'poke', 'getSettings', 'setSettings', 'login', function($scope, poke, getSettings, setSettings, login) {
 	var settings = getSettings()
 	// TODO: get credentials from local storage
 	$scope.url = settings.url
@@ -16,6 +16,8 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIASettingsService', '
 	$scope.position = settings.position
 	$scope.district = settings.district
 	$scope.employeeId = settings.employeeId
+	// set up alerts
+	$scope.alerts = [ { type: 'success', msg: "Don't forget validate your settings." } ]
 	$scope.validate = function() {
 		console.log('validate')
 		// validate url
@@ -23,10 +25,11 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIASettingsService', '
 		var pokeCallback = function(success) {
 			if (success) {
 				console.log('url is valid: ' + url + ', checking login')
-				$scope.settingsForm.url.$valid = true
+				$scope.alerts = [ { type: 'success', msg: 'Ellipse URL is valid.' } ]
 			} else {
 				console.log('url is NOT valid: ' + url)
 				$scope.settingsForm.url.$invalid = true
+				$scope.alerts = [ { type: 'danger', msg: 'Ellipse URL is not valid.' } ]
 			}
 		}
 		poke(url, pokeCallback)
