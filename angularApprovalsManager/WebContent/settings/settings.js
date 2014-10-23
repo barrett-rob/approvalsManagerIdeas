@@ -1,30 +1,32 @@
 'use strict';
 
-angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACredentialsService', 'RIAHttpService' ])
+angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACredentialsService', 'RIAHttpService', 'ApprovalsManagerService' ])
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/settings', {
 		templateUrl: 'settings/settings.html',
 		controller: 'settingsController'
 	});
 }])
-.controller('settingsController', [ '$scope', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'executeLogin', function($scope, poke, getCredentials, setCredentials, getUrl, setUrl, executeLogin) {
+.controller('settingsController', 
+	[ '$scope', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'getFilters', 'setFilters', 'executeLogin', 
+	function($scope, poke, getCredentials, setCredentials, getUrl, setUrl, getFilters, setFilters, executeLogin) {
 	// set up alerts
 	$scope.alerts = [ { type: 'info', msg: "Don't forget to validate your settings." } ]
-	// set up url and credentials
+	// set up credentials
 	var oldcredentials = getCredentials()
 	$scope.credentials = oldcredentials
+	// set up url
 	var oldurl = getUrl()
 	$scope.url = oldurl
-	// TODO: implement filters service
-	$scope.filters = []
-	$scope.filters.employeeId = ''
+	// set up filters
+	$scope.filters = getFilters()
 	$scope.validate = function() {
 		console.log('validate')
 		// validate url
 		var url = $scope.url
 		poke(url, function(success) {
 			if (success) {
-				console.log('url is valid: ' + url + ', checking login')
+				console.log('url is valid, checking credentials by logging in')
 				$scope.alerts = [ { type: 'success', msg: 'Ellipse URL is valid.' } ]
 				// validate credentials
 				var newcredentials = {}
@@ -33,9 +35,13 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 				executeLogin(
 					function(response) {
 						// success
+						console.log('credentials are valid')
 						$scope.alerts.push( { type: 'success', msg: 'Login succeeded, these settings will be retained.' } )
+						// validate filters?
+						setFilters($scope.filters)
 					}, 
-					function(status) {
+					function(response) {
+						console.log('credentials are NOT valid')
 						$scope.alerts.push( { type: 'danger', msg: 'Login failed, these settings will not be retained.' } )
 						var message = response.messages.errors.message
 						$scope.alerts.push( { type: 'danger', msg: message.text } )
