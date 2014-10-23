@@ -27,15 +27,25 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 	self.getBindUrl = function(url) {
 		return url + '/bind'
 	}
+	self.createErrorResponse = function(text) {
+		var response = { 'messages': { 'errors': { 'message': { 'text': text } } } }
+		return response
+	}
 })
 .factory('executeService', [ '$http', 'getUrl', function($http, getUrl) {
-	return function() {
-
+	// executes a service call, calls the 1st callback 
+	// if the login succeeded, or the 2nd if it failed
+	return function(successCallback, failureCallback) {
+		if (!angular.isDefined(self.connectionId)) {
+			if (failureCallback) {
+				failureCallback(createErrorResponse('you must log in using executeLogin() before using executeService()'))
+			}
+		}
 	}
 }])
 .factory('executeLogin', [ '$http', 'getCredentials', 'getUrl', function($http, getCredentials, getUrl) {
-	// executes a login, then calls the 1st callback 
-	// if the login succeeded, or the 2nd if it failed
+	// executes a login, calls the 1st callback if
+	// the login succeeded, or the 2nd if it failed
 	return function(successCallback, failureCallback) {
 		var credentials = getCredentials()
 		// construct interaction object
@@ -77,8 +87,7 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 		.error(function(data, status, headers, config) {
 			// special case: populate error messages
 			if (failureCallback) {
-				var response = { 'messages': { 'errors': { 'message': { 'text': 'login failed with http status code' + status } } } }
-				failureCallback(response)
+				failureCallback(createErrorResponse('login failed: http status code' + status))
 			}
 		})
 	}
