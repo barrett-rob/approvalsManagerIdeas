@@ -62,8 +62,17 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 		var response = { 'messages': { 'errors': { 'message': { 'text': text } } } }
 		return response
 	}
+	self.getActionFromData = function(data) {
+  		// for the case when there is only one action
+		var json = x2js.xml_str2json(data)
+		if (angular.isDefined(json.interaction.actions.action)) {			
+  			return json.interaction.actions.action
+		} else {
+			return {}
+		}
+	}
 	self.executePost = function(http, url, interaction, successFunction, errorFunction) {
-		var xml = x2js.json2xml_str(interaction)
+		var xml = self.x2js.json2xml_str(interaction)
 		http.post(url, xml, {'headers': {'Content-Type':'application/xml'} })
 		.success(function(data, status, headers, config) {
 			if (successFunction) {
@@ -107,14 +116,25 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 			restart,
 			maxInstances,
 			dto
-			)
+		)
 		var interaction = self.createInteraction('RIAHttpService.executeService', [ serviceaction ])
 		var url = self.getBindUrl(getUrl())
-		self.executePost($http, url, interaction, function(data, status, headers, config) {
-			// success
-		}, function(data, status, headers, config) {
-			// error
-		})
+		self.executePost(
+			$http, 
+			url, 
+			interaction, 
+			function(data, status, headers, config) { // success (may contain error messages)
+				var response = self.getActionFromData(data)
+				if (successCallback) {
+					successCallback(response)
+				}
+			},
+			function(data, status, headers, config) { // severe error
+				if (failureCallback) {
+					failureCallback(createErrorResponse('executeService failed: http status code' + status))
+				}
+			}
+		)
 	}
 }])
 .factory('executeLogin', [ '$http', 'getCredentials', 'getUrl', function($http, getCredentials, getUrl) {
@@ -136,41 +156,43 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 		var action = self.createAction('login', data)
 		var interaction = self.createInteraction('login', [ action ])
 		var url = self.getBindUrl(getUrl())
-		self.executePost($http, url, interaction, function(data, status, headers, config) {
-			// success
-	  		// populate response object
-			var json = x2js.xml_str2json(data)
-	  		var response = json.interaction.actions.action
-			// initialise messages
-			var messages = response.messages
-			if (!messages || messages == '') {
-				response.messages = {}
-			}
-			if (angular.isDefined(response.messages.errors)) {
-				// login failed
-				if (failureCallback) {
-					failureCallback(response)
+		self.executePost(
+			$http, 
+			url, 
+			interaction, 
+			function(data, status, headers, config) {
+				// success
+				var response = self.getActionFromData(data)
+				// initialise messages
+				var messages = response.messages
+				if (!messages || messages == '') {
+					response.messages = {}
 				}
-			} else {
-				// login success
-				if (angular.isDefined(response.data.connectionId)) {
-					if (angular.isDefined(self.connectionId)) {
-						console.warn('logging in when there is already a connectionId defined')
-						console.warn('connectionId [' + self.connectionId + '] will be discarded')
+				if (angular.isDefined(response.messages.errors)) { // login failure
+					if (failureCallback) {
+						failureCallback(response)
 					}
-					self.connectionId = response.data.connectionId
+				} else { // login success 
+					// trap the connectionnId
+					if (angular.isDefined(response.data.connectionId)) {
+						if (angular.isDefined(self.connectionId)) {
+							console.warn('logging in when there is already a connectionId defined')
+							console.warn('connectionId [' + self.connectionId + '] will be discarded')
+						}
+						self.connectionId = response.data.connectionId
+					}
+			 		if (successCallback) {
+			 			successCallback(response)
+			 		}
 				}
-		 		if (successCallback) {
-		 			successCallback(response)
-		 		}
+			},
+			function(data, status, headers, config) { // severe error
+				// populate error messages
+				if (failureCallback) {
+					failureCallback(createErrorResponse('executeLogin failed: http status code' + status))
+				}
 			}
-		}, function(data, status, headers, config) {
-			// error
-			// comms failure? - populate error messages
-			if (failureCallback) {
-				failureCallback(createErrorResponse('login failed: http status code' + status))
-			}
-		})
+		)
 	}
 }])
 .factory('poke', [ '$http', function($http) {
