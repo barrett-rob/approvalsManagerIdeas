@@ -59,12 +59,13 @@ describe('RIAHttpService tests', function() {
 			expect(login).toBeDefined()
 			// assertions for good login
 			httpBackend.whenPOST().respond(SUCCESFUL_LOGIN_RESPONSE)
-			var successCallback = function(response) {
+			var response = login(function(response) {
 				expect(response.data.connectionId).toBeDefined()
 				expect(response.messages).toBeDefined()
 				expect(response.messages).toEqual({})
-			}
-			var response = login(successCallback)
+			}, function() {
+				expect('fail').toBeUndefined()
+			})
 			httpBackend.flush()
 		})
 
@@ -75,13 +76,15 @@ describe('RIAHttpService tests', function() {
 			expect(login).toBeDefined()
 			// assertions for bad login
 			httpBackend.whenPOST().respond(FAILED_LOGIN_RESPONSE)
-			var failedCallback = function(response) {
+			login(function(response) {
+				expect('fail').toBeUndefined()
+			}, function(response) {
+				expect(response.data).toBeUndefined()
 				expect(response.messages.errors).toBeDefined()
 				expect(response.messages.errors.message).toBeDefined()
-				expect(response.messages.errors.message.text).toEqual('USER PROFILE NOT FOUND')
 				expect(response.messages.errors.message.field).toEqual('username')
-			}
-			var response = login(failedCallback)
+				expect(response.messages.errors.message.text).toEqual('USER PROFILE NOT FOUND')
+			})
 			httpBackend.flush()
 		})
 
@@ -100,12 +103,13 @@ describe('RIAHttpService tests', function() {
 			setCredentials(credentials)
 			// assertions for login message
 			httpBackend.expectPOST(undefined, LOGIN_REQUEST, undefined).respond(SUCCESFUL_LOGIN_RESPONSE)
-			var successCallback = function(response) {
+			login(function(response) {
 				expect(response.data.connectionId).toBeDefined()
 				expect(response.messages).toBeDefined()
 				expect(response.messages).toEqual({})
-			}
-			var response = login(successCallback)
+			}, function() {
+				expect('fail').toBeUndefined()
+			})
 			httpBackend.flush()
 		})
 

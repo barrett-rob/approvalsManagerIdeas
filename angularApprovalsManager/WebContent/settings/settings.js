@@ -8,6 +8,9 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 	});
 }])
 .controller('settingsController', [ '$scope', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'login', function($scope, poke, getCredentials, setCredentials, getUrl, setUrl, login) {
+	// set up alerts
+	$scope.alerts = [ { type: 'info', msg: "Don't forget to validate your settings." } ]
+	// set up url and credentials
 	var oldcredentials = getCredentials()
 	$scope.credentials = oldcredentials
 	var oldurl = getUrl()
@@ -15,13 +18,11 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 	// TODO: implement filters service
 	$scope.filters = []
 	$scope.filters.employeeId = ''
-	// set up alerts
-	$scope.alerts = [ { type: 'success', msg: "Don't forget validate your settings." } ]
 	$scope.validate = function() {
 		console.log('validate')
 		// validate url
 		var url = $scope.url
-		var pokeCallback = function(success) {
+		poke(url, function(success) {
 			if (success) {
 				console.log('url is valid: ' + url + ', checking login')
 				$scope.alerts = [ { type: 'success', msg: 'Ellipse URL is valid.' } ]
@@ -31,27 +32,22 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 				setCredentials(newcredentials)
 				login(
 					function(response) {
-						// var connectionId = response.data.connectionId
-						if (angular.isDefined(response.messages.errors)) {
-							$scope.alerts.push( { type: 'danger', msg: 'Login failed, these settings will not be kept.' } )
-							var message = response.messages.errors.message
-							$scope.alerts.push( { type: 'danger', msg: message.text } )
-						} else {
-							// success
-							$scope.alerts.push( { type: 'success', msg: 'Login succeeded, these settings will be kept.' } )
-						}
+						// success
+						$scope.alerts.push( { type: 'success', msg: 'Login succeeded, these settings will be kept.' } )
 					}, 
 					function(status) {
 						$scope.alerts.push( { type: 'danger', msg: 'Login failed, these settings will not be kept.' } )
-						// old settings remain
-						setSettings(settings)
+						var message = response.messages.errors.message
+						$scope.alerts.push( { type: 'danger', msg: message.text } )
+						setCredentials(oldcredentials)
 					}
 				)
+				setUrl(url)
 			} else {
 				console.log('url is NOT valid: ' + url)
 				$scope.alerts = [ { type: 'danger', msg: 'Ellipse URL is not valid.' } ]
+				setUrl(oldurl)
 			}
-		}
-		poke(url, pokeCallback)
+		})
 	}
 }])

@@ -5,7 +5,9 @@ angular.module('approvalsManager.home', ['ngRoute', 'RIAHttpService'])
 	$routeProvider.when('/home', {
 		templateUrl: 'home/home.html',
 		controller: 'homeController'
-	});
+	})
 }])
-.controller('homeController', [function() {
-}]);
+.controller('homeController', ['$scope', function($scope) {
+	// set up alerts
+	$scope.alerts = [ { type: 'info', msg: "Connecting to Ellipse..." } ]
+}])

@@ -7,6 +7,6 @@
 		<div><label>Position:</label><input type="text" name="position" ng-model="credentials.position"></div>
 		<div><label>Employee Id:</label><input type="text" name="employeeId" ng-model="filters.employeeId"></div>
 		<div><button ng-click="validate()">Validate</button></div>
-		<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 	</form>
+	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>

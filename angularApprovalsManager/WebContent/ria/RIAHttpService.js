@@ -31,7 +31,9 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 	}
 })
 .factory('login', [ '$http', 'getCredentials', 'getUrl', function($http, getCredentials, getUrl) {
-	return function(successCallback, errorCallback) {
+	// executes a login, then calls the 1st callback 
+	// if the login succeeded, or the 2nd if it failed
+	return function(successCallback, failureCallback) {
 		var credentials = getCredentials()
 		// construct interaction object
 		var data = {
@@ -57,14 +59,23 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 			if (!messages || messages == '') {
 				response.messages = {}
 			}
-	 		if (successCallback) {
-	 			successCallback(response)
-	 		}
+			if (angular.isDefined(response.messages.errors)) {
+				// login failed
+				if (failureCallback) {
+					failureCallback(response)
+				}
+			} else {
+				// login success
+		 		if (successCallback) {
+		 			successCallback(response)
+		 		}
+			}
 		})
 		.error(function(data, status, headers, config) {
-			// populate error messages
-			if (errorCallback) {
-				errorCallback(status)
+			// special case: populate error messages
+			if (failureCallback) {
+				var response = { 'messages': { 'errors': { 'message': { 'text': 'login failed with http status code' + status } } } }
+				failureCallback(response)
 			}
 		})
 	}

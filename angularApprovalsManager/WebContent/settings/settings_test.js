@@ -18,6 +18,8 @@ describe('approvalsManager.settings module', function() {
 			expect(scope.filters.employeeId).toBeDefined()
 			// check that the validate method is present
 			expect(scope.validate).toBeDefined()
+			// check that there is an alerts object
+			expect(scope.alerts).toBeDefined()
 		}))
 
 	})

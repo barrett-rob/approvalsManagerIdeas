@@ -29,6 +29,10 @@
 	padding: 0;
 }
 
+.paddedbody {
+	padding: 2px;
+}
+
 .poweredby {
 	width: 98%;
 	text-align: right;
