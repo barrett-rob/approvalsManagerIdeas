@@ -26,6 +26,9 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 		}
 		return { 'action': action }
 	}
+	self.getBindUrl = function(url) {
+		return url + '/bind'
+	}
 })
 .factory('login', [ '$http', 'getCredentials', 'getUrl', function($http, getCredentials, getUrl) {
 	return function(successCallback, errorCallback) {
@@ -34,7 +37,7 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 		var data = {
 			'username': credentials.username,
 			'password': credentials.password,
-			'scope': credentials.district,
+			'scope': credentials.scope,
 			'position': credentials.position,
 			'rememberMe': 'N',
 		}
@@ -43,8 +46,8 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 		var x2js = new X2JS()
 		var xml = x2js.json2xml_str(interaction)
 		// execute post
-		var url = getUrl()
-		$http.post(url, xml)
+		var url = self.getBindUrl(getUrl())
+		$http.post(url, xml, {'headers': {'Content-Type':'application/xml'} })
 		.success(function(data, status, headers, config) {
 	  		// populate response object
 			var json = x2js.xml_str2json(data)

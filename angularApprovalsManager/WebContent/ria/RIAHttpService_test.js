@@ -95,7 +95,7 @@ describe('RIAHttpService tests', function() {
 			var credentials = getCredentials()
 			credentials.username = 'UNUNUN'
 			credentials.password = 'PWPWPW'
-			credentials.district = 'DIDIDI'
+			credentials.scope = 'DIDIDI'
 			credentials.position = 'POPOPO'
 			setCredentials(credentials)
 			// assertions for login message

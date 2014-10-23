@@ -31,10 +31,18 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 				setCredentials(newcredentials)
 				login(
 					function(response) {
-						// if login worked
-						// else 
+						// var connectionId = response.data.connectionId
+						if (angular.isDefined(response.messages.errors)) {
+							$scope.alerts.push( { type: 'danger', msg: 'Login failed, these settings will not be kept.' } )
+							var message = response.messages.errors.message
+							$scope.alerts.push( { type: 'danger', msg: message.text } )
+						} else {
+							// success
+							$scope.alerts.push( { type: 'success', msg: 'Login succeeded, these settings will be kept.' } )
+						}
 					}, 
-					function() {
+					function(status) {
+						$scope.alerts.push( { type: 'danger', msg: 'Login failed, these settings will not be kept.' } )
 						// old settings remain
 						setSettings(settings)
 					}
