@@ -106,7 +106,7 @@ describe('RIAHttpService tests', function() {
 			credentials.position = 'POPOPO'
 			setCredentials(credentials)
 			// assertions for login response message
-			httpBackend.expectPOST(undefined, LOGIN_REQUEST, undefined).respond(SUCCESFUL_LOGIN_RESPONSE)
+			httpBackend.expectPOST(undefined, LOGIN_REQUEST).respond(SUCCESFUL_LOGIN_RESPONSE)
 			executeLogin(function(response) {
 				expect(response.data.connectionId).toBeDefined()
 				expect(response.messages).toBeDefined()
@@ -164,7 +164,7 @@ describe('RIAHttpService tests', function() {
 			expect(executeService).toBeDefined()
 			// log in first
 			// assertions for login response message
-			httpBackend.expectPOST(undefined, undefined, undefined).respond(SUCCESFUL_LOGIN_RESPONSE)
+			httpBackend.expectPOST().respond(SUCCESFUL_LOGIN_RESPONSE)
 			executeLogin(function(response) {
 				expect(response.data.connectionId).toBeDefined()
 				expect(response.messages).toBeDefined()
@@ -176,7 +176,7 @@ describe('RIAHttpService tests', function() {
 			// expect this to work because we have logged in
 			// note: this tests both the payload
 			// prep and response parsing
-			httpBackend.expectPOST(undefined, PREFERENCES_READ_REQUEST, undefined).respond(PREFERENCES_READ_RESPONSE)
+			httpBackend.expectPOST(undefined, PREFERENCES_READ_REQUEST).respond(PREFERENCES_READ_RESPONSE)
 			executeService(
 				'com.mincom.ellipse.service.m1000.preferences.PreferencesService', 
 				'search', 

@@ -8,9 +8,16 @@ angular.module('approvalsManager.home', ['ngRoute', 'RIAHttpService'])
 	})
 }])
 .controller('homeController', ['$scope', '$timeout', 'executeLogin', function($scope, $timeout, executeLogin) {
-	// set up alerts
+
+	// init
 	$scope.alerts = [ { type: 'info', msg: "Connecting to Ellipse..." } ]
-	self.getApprovals = function() {
+	$scope.counts = undefined
+
+	self.getApprovalCounts = function() {
+		$scope.counts = [
+			{ 'itemType': 'foo', 'itemTypeDescription': 'Foo foo foo', 'itemTypeCount': 1 },
+			{ 'itemType': 'bar', 'itemTypeDescription': 'Bar bar bar', 'itemTypeCount': 2 }
+		]
 		$scope.alerts.push({ type: 'success', msg: "Retrieved approval items." })
 	}
 	self.login = function() {
@@ -18,7 +25,7 @@ angular.module('approvalsManager.home', ['ngRoute', 'RIAHttpService'])
 			// login success
 			$scope.alerts.push({ type: 'success', msg: "Connected" })
 			$scope.alerts.push({ type: 'info', msg: "Checking for approval items..." })
-			$timeout(self.getApprovals, 500);
+			$timeout(self.getApprovalCounts, 500);
 		}, function(response) {
 			// login failure
 			$scope.alerts.push({ type: 'danger', msg: "Connection failed, please check settings" })
