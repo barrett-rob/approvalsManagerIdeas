@@ -1,7 +1,5 @@
 'use strict';
 
-// ria http service unit tests
-
 describe('RIAHttpService tests', function() {
 
 	beforeEach(module('RIAURLService'))
@@ -39,13 +37,13 @@ describe('RIAHttpService tests', function() {
 
 	describe('login tests', function() {
 
-		var scope, controller, httpBackend, login, setCredentials, getCredentials, setUrl, getUrl
+		var scope, controller, httpBackend, executeLogin, setCredentials, getCredentials, setUrl, getUrl
 
-		beforeEach(inject(function(_$controller_, _$httpBackend_, $rootScope, _login_, _setCredentials_, _getCredentials_, _setUrl_, _getUrl_) {
+		beforeEach(inject(function(_$controller_, _$httpBackend_, $rootScope, _executeLogin_, _setCredentials_, _getCredentials_, _setUrl_, _getUrl_) {
 			scope = $rootScope.$new()
 			controller = _$controller_
 			httpBackend = _$httpBackend_
-			login = _login_
+			executeLogin = _executeLogin_
 			setCredentials = _setCredentials_
 			getCredentials = _getCredentials_
 			setUrl = _setUrl_
@@ -56,10 +54,10 @@ describe('RIAHttpService tests', function() {
 			expect(scope).toBeDefined()
 			expect(controller).toBeDefined()
 			expect(httpBackend).toBeDefined()
-			expect(login).toBeDefined()
+			expect(executeLogin).toBeDefined()
 			// assertions for good login
 			httpBackend.whenPOST().respond(SUCCESFUL_LOGIN_RESPONSE)
-			var response = login(function(response) {
+			executeLogin(function(response) {
 				expect(response.data.connectionId).toBeDefined()
 				expect(response.messages).toBeDefined()
 				expect(response.messages).toEqual({})
@@ -73,10 +71,10 @@ describe('RIAHttpService tests', function() {
 			expect(scope).toBeDefined()
 			expect(controller).toBeDefined()
 			expect(httpBackend).toBeDefined()
-			expect(login).toBeDefined()
+			expect(executeLogin).toBeDefined()
 			// assertions for bad login
 			httpBackend.whenPOST().respond(FAILED_LOGIN_RESPONSE)
-			login(function(response) {
+			executeLogin(function(response) {
 				expect('fail').toBeUndefined()
 			}, function(response) {
 				expect(response.data).toBeUndefined()
@@ -92,7 +90,7 @@ describe('RIAHttpService tests', function() {
 			expect(scope).toBeDefined()
 			expect(controller).toBeDefined()
 			expect(httpBackend).toBeDefined()
-			expect(login).toBeDefined()
+			expect(executeLogin).toBeDefined()
 			expect(getCredentials).toBeDefined()
 			expect(setCredentials).toBeDefined()
 			var credentials = getCredentials()
@@ -103,7 +101,7 @@ describe('RIAHttpService tests', function() {
 			setCredentials(credentials)
 			// assertions for login message
 			httpBackend.expectPOST(undefined, LOGIN_REQUEST, undefined).respond(SUCCESFUL_LOGIN_RESPONSE)
-			login(function(response) {
+			executeLogin(function(response) {
 				expect(response.data.connectionId).toBeDefined()
 				expect(response.messages).toBeDefined()
 				expect(response.messages).toEqual({})

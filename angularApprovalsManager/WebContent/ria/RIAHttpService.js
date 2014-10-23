@@ -1,7 +1,5 @@
 'use strict'
 
-// ria http service
-
 angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 .config(function() {
 	self.createInteraction = function(
@@ -30,7 +28,12 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 		return url + '/bind'
 	}
 })
-.factory('login', [ '$http', 'getCredentials', 'getUrl', function($http, getCredentials, getUrl) {
+.factory('executeService', [ '$http', 'getUrl', function($http, getUrl) {
+	return function() {
+
+	}
+}])
+.factory('executeLogin', [ '$http', 'getCredentials', 'getUrl', function($http, getCredentials, getUrl) {
 	// executes a login, then calls the 1st callback 
 	// if the login succeeded, or the 2nd if it failed
 	return function(successCallback, failureCallback) {

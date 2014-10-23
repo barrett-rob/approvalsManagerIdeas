@@ -7,7 +7,7 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 		controller: 'settingsController'
 	});
 }])
-.controller('settingsController', [ '$scope', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'login', function($scope, poke, getCredentials, setCredentials, getUrl, setUrl, login) {
+.controller('settingsController', [ '$scope', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'executeLogin', function($scope, poke, getCredentials, setCredentials, getUrl, setUrl, executeLogin) {
 	// set up alerts
 	$scope.alerts = [ { type: 'info', msg: "Don't forget to validate your settings." } ]
 	// set up url and credentials
@@ -30,7 +30,7 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 				var newcredentials = {}
 				angular.copy($scope.credentials, newcredentials)
 				setCredentials(newcredentials)
-				login(
+				executeLogin(
 					function(response) {
 						// success
 						$scope.alerts.push( { type: 'success', msg: 'Login succeeded, these settings will be retained.' } )
