@@ -36,22 +36,22 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 					function(response) {
 						// success
 						console.log('credentials are valid')
-						$scope.alerts.push( { type: 'success', msg: 'Login succeeded, these settings will be retained.' } )
+						$scope.alerts.push( { type: 'success', msg: 'Login succeeded, these settings have been saved.' } )
 						// validate filters?
 						setFilters($scope.filters)
 					}, 
 					function(response) {
 						console.log('credentials are NOT valid')
-						$scope.alerts.push( { type: 'danger', msg: 'Login failed, these settings will not be retained.' } )
 						var message = response.messages.errors.message
 						$scope.alerts.push( { type: 'danger', msg: message.text } )
+						$scope.alerts.push( { type: 'danger', msg: 'Login failed, these settings have not been saved.' } )
 						setCredentials(oldcredentials)
 					}
 				)
 				setUrl(url)
 			} else {
 				console.log('url is NOT valid: ' + url)
-				$scope.alerts = [ { type: 'danger', msg: 'Ellipse URL is not valid.' } ]
+				$scope.alerts = [ { type: 'danger', msg: 'Ellipse URL is not valid, these settings have not been saved.' } ]
 				setUrl(oldurl)
 			}
 		})
