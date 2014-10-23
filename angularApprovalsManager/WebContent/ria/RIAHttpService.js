@@ -1,7 +1,15 @@
 'use strict'
 
+/* This is a stateful service, executeLogin() must 
+ * succeed before you can use executeService.
+ */
 angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 .config(function() {
+
+	// init connection id
+	self.connectionId = undefined
+
+	// utility methods
 	self.createInteraction = function(
 		application, // string
 		actions // array of action (see self.createAction)
@@ -79,6 +87,13 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 				}
 			} else {
 				// login success
+				if (angular.isDefined(response.data.connectionId)) {
+					if (angular.isDefined(self.connectionId)) {
+						console.warn('logging in when there is already a connectionId defined')
+						console.warn('connectionId [' + self.connectionId + '] will be discarded')
+					}
+					self.connectionId = response.data.connectionId
+				}
 		 		if (successCallback) {
 		 			successCallback(response)
 		 		}
