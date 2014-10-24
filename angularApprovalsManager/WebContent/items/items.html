@@ -3,7 +3,9 @@
 		<p>No items matching your filters.</p>
 	</div>
 	<div ng-repeat="item in items">
-		<span>{{ item }}</span>
+		<span>{{ item.transactionKey }}</span>
+		<span>{{ item.description }}</span>
+		<span>{{ item.amountToAuthorise }}</span>
 	</div>
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>
