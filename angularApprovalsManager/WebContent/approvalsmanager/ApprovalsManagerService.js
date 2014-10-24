@@ -17,7 +17,7 @@ angular.module('ApprovalsManagerService', [ 'RIAHttpService' ])
 }])
 .factory('getItemTypeCounts', [ 'executeService', function(executeService) {
 	return function(
-		successCallback // function(itemTypeCounts)
+		whenComplete // function(itemTypeCounts)
 		) {
 		var dto = angular.copy(self.filters)
 		executeService(
@@ -45,8 +45,8 @@ angular.module('ApprovalsManagerService', [ 'RIAHttpService' ])
 						}
 					}
 				}
-				if (successCallback) {
-					successCallback(itemTypeCounts)
+				if (whenComplete) {
+					whenComplete(itemTypeCounts)
 				}
 			}
 		)

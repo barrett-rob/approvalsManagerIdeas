@@ -24,7 +24,7 @@ describe('ApprovalsManagerService tests', function() {
 			expect(getItemTypeCounts).toBeDefined()
 			expect(executeLogin).toBeDefined()
 			// log in
-			httpBackend.whenPOST().respond(SUCCESFUL_LOGIN_RESPONSE)
+			httpBackend.expectPOST().respond(SUCCESFUL_LOGIN_RESPONSE)
 			executeLogin()
 			httpBackend.flush()
 			// get item type counts

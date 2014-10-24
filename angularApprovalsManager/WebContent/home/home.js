@@ -1,24 +1,23 @@
 'use strict';
 
-angular.module('approvalsManager.home', ['ngRoute', 'RIAHttpService'])
+angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'ApprovalsManagerService' ])
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/home', {
 		templateUrl: 'home/home.html',
 		controller: 'homeController'
 	})
 }])
-.controller('homeController', ['$scope', '$timeout', 'executeLogin', function($scope, $timeout, executeLogin) {
+.controller('homeController', ['$scope', '$timeout', 'executeLogin', 'getItemTypeCounts', function($scope, $timeout, executeLogin, getItemTypeCounts) {
 
 	// init
 	$scope.alerts = [ { type: 'info', msg: "Connecting to Ellipse..." } ]
-	$scope.counts = undefined
+	$scope.itemTypeCounts = undefined
 
 	self.getApprovalCounts = function() {
-		$scope.counts = [
-			{ 'itemType': 'foo', 'itemTypeDescription': 'Foo foo foo', 'itemTypeCount': 1 },
-			{ 'itemType': 'bar', 'itemTypeDescription': 'Bar bar bar', 'itemTypeCount': 2 }
-		]
-		$scope.alerts.push({ type: 'success', msg: "Retrieved approval items." })
+		getItemTypeCounts(function(itemTypeCounts) {
+			$scope.itemTypeCounts = itemTypeCounts
+			$scope.alerts.push({ type: 'success', msg: "Retrieved approval items." })
+		})
 	}
 	self.login = function() {
 		executeLogin(function(response) {
