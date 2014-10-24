@@ -108,8 +108,10 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 
 		// first check for connectionId
 		if (!angular.isDefined(self.connectionId)) {
+			var msg = 'you must log in using executeLogin() before using executeService()'
+			console.warn(msg)
 			if (failureCallback) {
-				failureCallback(createErrorResponse('you must log in using executeLogin() before using executeService()'))
+				failureCallback(createErrorResponse(msg))
 			}
 			return
 		}

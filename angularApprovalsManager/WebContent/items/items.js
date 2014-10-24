@@ -8,8 +8,8 @@ angular.module('approvalsManager.items', [ 'ngRoute', 'ApprovalsManagerService' 
 	});
 }])
 .controller('itemsController', 
-	[ '$scope', '$routeParams',
-	function($scope, $routeParams) {
+	[ '$scope', '$routeParams', '$timeout', 'getItems',
+	function($scope, $routeParams, $timeout, getItems) {
 	// set up item type
 	if (angular.isDefined($routeParams.itemType)) {
 		$scope.itemType = $routeParams.itemType
@@ -20,4 +20,12 @@ angular.module('approvalsManager.items', [ 'ngRoute', 'ApprovalsManagerService' 
 	// set up alerts
 	$scope.alerts = [ { type: 'info', msg: "Retrieving items of type " + $scope.itemType } ]
 	// retrieve items for item type
+	self.getItems = function() {
+		getItems($scope.itemType,
+			function(items) {
+				$scope.items = items
+			}
+		)
+	}
+	$timeout(self.getItems, 250);
 }])

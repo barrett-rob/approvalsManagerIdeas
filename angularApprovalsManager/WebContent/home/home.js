@@ -31,7 +31,7 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 			// login success
 			$scope.alerts.push({ type: 'success', msg: "Connected" })
 			$scope.alerts.push({ type: 'info', msg: "Checking for approval items..." })
-			$timeout(self.getApprovalCounts, 500);
+			$timeout(self.getApprovalCounts, 250);
 		}
 		if (hasConnectionId()) {
 			doGetApprovalCounts()
@@ -39,11 +39,10 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 			executeLogin(
 				doGetApprovalCounts, 
 				function(response) {
-					// login failure
 					$scope.alerts.push({ type: 'danger', msg: "Connection failed, please check settings" })
 				}
 			)
 		}
 	}
-	$timeout(self.login, 1000);
+	$timeout(self.login, 250);
 }])
