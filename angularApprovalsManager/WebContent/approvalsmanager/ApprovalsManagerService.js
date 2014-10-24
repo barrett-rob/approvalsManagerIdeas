@@ -26,7 +26,7 @@ angular.module('ApprovalsManagerService', [ 'RIAHttpService' ])
 			true, // return warnings
 			undefined, // required attributes
 			undefined, // restart
-			20, // max instances
+			100, // max instances
 			dto, // dto
 			function(response) {
 				var itemTypeCounts = {}

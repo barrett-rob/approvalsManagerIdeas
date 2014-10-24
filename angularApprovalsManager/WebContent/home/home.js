@@ -15,8 +15,14 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 
 	self.getApprovalCounts = function() {
 		getItemTypeCounts(function(itemTypeCounts) {
-			$scope.itemTypeCounts = itemTypeCounts
 			$scope.alerts.push({ type: 'success', msg: "Retrieved approval items." })
+			for (var key in itemTypeCounts) {
+				// something in itemTypeCounts
+				$scope.itemTypeCounts = itemTypeCounts
+				return
+			}
+			// nothing in itemTypeCounts
+			$scope.itemTypeCounts = undefined
 		})
 	}
 	self.login = function() {

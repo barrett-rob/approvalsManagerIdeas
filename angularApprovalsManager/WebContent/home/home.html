@@ -2,5 +2,8 @@
 	<div ng-hide="itemTypeCounts">
 		<p>No items matching your filters.</p>
 	</div>
+	<div ng-repeat="itemTypeCount in itemTypeCounts">
+		<p>{{ itemTypeCount }}</p>
+	</div>
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>
