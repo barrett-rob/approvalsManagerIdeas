@@ -7,7 +7,8 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 		controller: 'homeController'
 	})
 }])
-.controller('homeController', ['$scope', '$timeout', 'executeLogin', 'getItemTypeCounts', function($scope, $timeout, executeLogin, getItemTypeCounts) {
+.controller('homeController', ['$scope', '$timeout', 'executeLogin', 'getItemTypeCounts', 'hasConnectionId',
+	function($scope, $timeout, executeLogin, getItemTypeCounts, hasConnectionId) {
 
 	// init
 	$scope.alerts = [ { type: 'info', msg: "Connecting to Ellipse..." } ]
@@ -26,15 +27,23 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 		})
 	}
 	self.login = function() {
-		executeLogin(function(response) {
+		var doGetApprovalCounts = function(response) {
 			// login success
 			$scope.alerts.push({ type: 'success', msg: "Connected" })
 			$scope.alerts.push({ type: 'info', msg: "Checking for approval items..." })
 			$timeout(self.getApprovalCounts, 500);
-		}, function(response) {
-			// login failure
-			$scope.alerts.push({ type: 'danger', msg: "Connection failed, please check settings" })
-		})
+		}
+		if (hasConnectionId()) {
+			doGetApprovalCounts()
+		} else {
+			executeLogin(
+				doGetApprovalCounts, 
+				function(response) {
+					// login failure
+					$scope.alerts.push({ type: 'danger', msg: "Connection failed, please check settings" })
+				}
+			)
+		}
 	}
 	$timeout(self.login, 1000);
 }])

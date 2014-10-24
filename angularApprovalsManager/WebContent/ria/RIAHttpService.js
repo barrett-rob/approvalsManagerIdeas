@@ -86,6 +86,11 @@ angular.module('RIAHttpService', [ 'RIAURLService', 'RIACredentialsService' ])
 		})
 	}
 })
+.factory('hasConnectionId', [ function() {
+	return function() {
+		return angular.isDefined(self.connectionId)
+	}
+}])
 .factory('executeService', [ '$http', 'getUrl', function($http, getUrl) {
 	return function(
 		service, // string
