@@ -3,7 +3,9 @@
 		<p>No items matching your filters.</p>
 	</div>
 	<div ng-repeat="itemTypeCount in itemTypeCounts">
-		<p>{{ itemTypeCount }}</p>
+		<span>{{ itemTypeCount.itemType }}</span>
+		<span>{{ itemTypeCount.count }}</span>
+		<span><a href="#/items?itemType={{ itemTypeCount.itemType }}">Details</a></span>
 	</div>
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>

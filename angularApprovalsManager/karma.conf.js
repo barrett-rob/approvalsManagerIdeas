@@ -9,8 +9,9 @@ module.exports = function(config){
 	'WebContent/bower_components/angular-mocks/angular-mocks.js',
 	'WebContent/x2js/*.js',
 	'WebContent/home/*.js',
-	'WebContent/approvalsmanager/*.js',
 	'WebContent/settings/*.js',
+	'WebContent/items/*.js',
+	'WebContent/approvalsmanager/*.js',
 	'WebContent/ria/*.js',
 	],
 

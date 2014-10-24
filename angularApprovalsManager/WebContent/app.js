@@ -5,6 +5,7 @@ angular.module('approvalsManager', [
 	'ngRoute',
 	'approvalsManager.home',
 	'approvalsManager.settings',
+	'approvalsManager.items',
 	'ui.bootstrap',
 	]).
 config(['$routeProvider', function($routeProvider) {
