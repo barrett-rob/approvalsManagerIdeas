@@ -29,8 +29,17 @@
 	padding: 0;
 }
 
-.paddedbody {
-	padding: 2px;
+.am-body {
+	width: 100%;
+	background: #e4e4e4;
+	padding: 15px;
+}
+
+.am-content {
+	width: 100%;
+	background: #fff;
+	box-shadow: 2px 2px 1px 1px #ccc;
+	padding: 15px;
 }
 
 .poweredby {

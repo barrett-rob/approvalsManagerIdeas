@@ -25,6 +25,7 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 			for (var key in itemTypeCounts) {
 				// something in itemTypeCounts
 				$scope.itemTypeCounts = itemTypeCounts
+				self.itemTypeCounts = itemTypeCounts
 				$timeout(function() {
 					// clear error messages
 					$scope.alerts = []
