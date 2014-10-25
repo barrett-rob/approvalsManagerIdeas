@@ -2,10 +2,12 @@
 	<div ng-hide="items">
 		<p>No items matching your filters.</p>
 	</div>
-	<div ng-repeat="item in items">
-		<span>{{ item.transactionKey }}</span>
-		<span>{{ item.description }}</span>
-		<span>{{ item.amountToAuthorise }}</span>
+	<div class="am-table">
+		<div class="am-row" ng-repeat="item in items">
+			<span class="am-transactionKey">{{ item.transactionKey }}</span>
+			<span class="am-descriptioon">{{ item.description }}</span>
+			<span class="am-amount">{{ item.amountToAuthorise }}</span>
+		</div>
 	</div>
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>
