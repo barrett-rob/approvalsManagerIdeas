@@ -19,8 +19,9 @@ describe('approvalsManager.home module', function() {
 			expect(ctrlr).toBeDefined()
 			expect(timeout).toBeDefined()
 			expect(httpBackend).toBeDefined()
-			// check that there is an alerts object
+			// check the scope
 			expect(scope.alerts).toBeDefined()
+			expect(scope.refresh).toBeDefined()
 			expect(scope.itemTypeCounts).toBeUndefined()
 			// login
 			httpBackend.expectPOST().respond(SUCCESFUL_LOGIN_RESPONSE)

@@ -2,6 +2,9 @@
 	<div ng-hide="itemTypeCounts">
 		<p>No items matching your filters.</p>
 	</div>
+	<div ng-hide="!itemTypeCounts">
+		<button ng-click="refresh()">Refresh</button>
+	</div>
 	<div ng-repeat="itemTypeCount in itemTypeCounts">
 		<span>{{ itemTypeCount.itemType }}</span>
 		<span>{{ itemTypeCount.count }}</span>

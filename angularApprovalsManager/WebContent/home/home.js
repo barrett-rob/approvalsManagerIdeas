@@ -11,15 +11,24 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 	function($scope, $timeout, executeLogin, getItemTypeCounts, hasConnectionId) {
 
 	// init
-	$scope.alerts = [ { type: 'info', msg: "Connecting to Ellipse..." } ]
+	$scope.alerts = []
 	$scope.itemTypeCounts = undefined
-
+	$scope.refresh = function() {
+		self.refresh()
+	}
+	self.refresh = function() {
+		self.login()
+	}
 	self.getApprovalCounts = function() {
 		getItemTypeCounts(function(itemTypeCounts) {
 			$scope.alerts.push({ type: 'success', msg: "Retrieved approval items." })
 			for (var key in itemTypeCounts) {
 				// something in itemTypeCounts
 				$scope.itemTypeCounts = itemTypeCounts
+				$timeout(function() {
+					// clear error messages
+					$scope.alerts = []
+				}, 1000)
 				return
 			}
 			// nothing in itemTypeCounts
@@ -27,6 +36,7 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 		})
 	}
 	self.login = function() {
+		$scope.alerts.push({ type: 'info', msg: "Connecting to Ellipse..." })
 		var doGetApprovalCounts = function(response) {
 			// login success
 			$scope.alerts.push({ type: 'success', msg: "Connected" })
@@ -44,5 +54,7 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 			)
 		}
 	}
-	$timeout(self.login, 250);
+	if (!angular.isDefined($scope.itemTypeCounts)) {
+		$timeout(self.refresh, 250);
+	}
 }])
