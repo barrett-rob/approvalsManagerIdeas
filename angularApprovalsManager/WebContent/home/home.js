@@ -20,14 +20,15 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 		self.login()
 	}
 	self.getApprovalCounts = function() {
+		var alert = { type: 'info', msg: "Checking for approval items..." }
+		$scope.alerts.push(alert)
 		getItemTypeCounts(function(itemTypeCounts) {
-			$scope.alerts.push({ type: 'success', msg: "Retrieved approval items." })
 			for (var key in itemTypeCounts) {
 				// something in itemTypeCounts
 				$scope.itemTypeCounts = itemTypeCounts
-				self.itemTypeCounts = itemTypeCounts
+				alert.msg = alert.msg + ' done'
 				$timeout(function() {
-					// clear error messages
+					// clear messages after a bit
 					$scope.alerts = []
 				}, 1000)
 				return
@@ -37,11 +38,11 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 		})
 	}
 	self.login = function() {
-		$scope.alerts.push({ type: 'info', msg: "Connecting to Ellipse..." })
+		var alert = { type: 'info', msg: "Connecting to Ellipse..." }
+		$scope.alerts.push(alert)
 		var doGetApprovalCounts = function(response) {
 			// login success
-			$scope.alerts.push({ type: 'success', msg: "Connected" })
-			$scope.alerts.push({ type: 'info', msg: "Checking for approval items..." })
+			alert.msg = alert.msg + '  done'
 			$timeout(self.getApprovalCounts, 250);
 		}
 		if (hasConnectionId()) {

@@ -8,8 +8,8 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 	});
 }])
 .controller('settingsController', 
-	[ '$scope', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'getFilters', 'setFilters', 'executeLogin', 
-	function($scope, poke, getCredentials, setCredentials, getUrl, setUrl, getFilters, setFilters, executeLogin) {
+	[ '$scope', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'getFilters', 'setFilters', 'executeLogin', '$timeout', 
+	function($scope, poke, getCredentials, setCredentials, getUrl, setUrl, getFilters, setFilters, executeLogin, $timeout) {
 	// set up alerts
 	$scope.alerts = [ { type: 'info', msg: "Don't forget to validate your settings." } ]
 	// set up credentials
@@ -39,6 +39,10 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 						$scope.alerts.push( { type: 'success', msg: 'Login succeeded, these settings have been saved.' } )
 						// validate filters?
 						setFilters($scope.filters)
+						$timeout(function() {
+							// clear messages after a bit
+							$scope.alerts = []
+						}, 1000)
 					}, 
 					function(response) {
 						console.log('credentials are NOT valid')

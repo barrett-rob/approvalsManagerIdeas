@@ -2,15 +2,15 @@
 	<div ng-hide="itemTypeCounts">
 		<p>No items matching your filters.</p>
 	</div>
-	<div ng-hide="!itemTypeCounts">
-		<button ng-click="refresh()">Refresh</button>
-	</div>
-	<div style"display: table">
-		<div class="am-itemTypeCount" ng-repeat="itemTypeCount in itemTypeCounts">
+	<div class="am-table">
+		<div class="am-row" ng-repeat="itemTypeCount in itemTypeCounts">
 			<div class="am-itemType">{{ itemTypeCount.itemType }}</div>
 			<div class="am-itemCount">{{ itemTypeCount.count }}</div>
 			<div class="am-itemDetails"><a href="#/items?itemType={{ itemTypeCount.itemType }}">Details</a></div>
 		</div>
+	</div>
+	<div ng-hide="!itemTypeCounts">
+		<button ng-click="refresh()">Refresh</button>
 	</div>
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>
