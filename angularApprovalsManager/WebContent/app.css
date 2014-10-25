@@ -67,7 +67,35 @@
 	padding: 15px;
 }
 
-.poweredby {
+.am-content div, .am-content button {
+	margin: 5px;
+}
+
+.am-poweredby {
 	color: #fff;
 	font-size: smaller;
 }
+
+.am-itemTypeCount {
+	width: 100%;
+	display: table-row;
+}
+
+.am-itemType {
+	width: 70%;
+	display: table-cell;
+}
+
+.am-itemCount {
+	width: 10%;
+	display: table-cell;
+}
+
+.am-itemDetails {
+	width: 10%;
+	display: table-cell;
+}
+
+
+
+
