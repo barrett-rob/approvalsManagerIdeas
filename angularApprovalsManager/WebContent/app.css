@@ -33,27 +33,41 @@
 	width: 100%;
 	background: #e4e4e4;
 	padding: 15px;
+	max-width: 1024px;
+}
+
+.am-page {
+	width: 100%;
+	background: #fff;
+	box-shadow: 4px 4px 2px 2px #ccc;
+	padding: 0px;
 }
 
 .am-header {
 	height: 45px;
 	width: 100%;
-	padding: inherit;
+	padding: 7px;
 	background: #3498db;
 	color: #fff;
 	text-align: center;
+	font-size: 16pt;
+	vertical-align: middle;
+}
+
+.am-footer {
+	height: 55px;
+	width: 100%;
+	text-align: center;
+	background: #3498db;
+	vertical-align: bottom;
+	padding: 15px;
 }
 
 .am-content {
-	width: 100%;
-	background: #fff;
-	box-shadow: 2px 2px 1px 1px #ccc;
-	padding: inherit;
+	padding: 15px;
 }
 
 .poweredby {
-	width: 98%;
-	text-align: right;
-	vertical-align: bottom;
+	color: #fff;
 	font-size: smaller;
 }
