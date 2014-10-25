@@ -35,11 +35,20 @@
 	padding: 15px;
 }
 
+.am-header {
+	height: 45px;
+	width: 100%;
+	padding: inherit;
+	background: #3498db;
+	color: #fff;
+	text-align: center;
+}
+
 .am-content {
 	width: 100%;
 	background: #fff;
 	box-shadow: 2px 2px 1px 1px #ccc;
-	padding: 15px;
+	padding: inherit;
 }
 
 .poweredby {
