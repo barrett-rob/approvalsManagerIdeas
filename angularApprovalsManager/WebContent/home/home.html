@@ -1,5 +1,5 @@
 <div class="am-header">
-	<span class="am-title">Approvals Manager</span>
+	<div class="am-title">Approvals Manager</div>
 	<img class="am-hamburger" src="images/home-icon.svg">
 </div>
 <div class="am-content">
@@ -12,19 +12,21 @@
 			<div class="am-cell am-item-count">{{ itemTypeCount.count }}</div>
 			<div class="am-cell am-item-details">
 				<a href="#/items?itemType={{ itemTypeCount.itemType }}">
-					<span class="am-item-details-ink fa fa-angle-right"></span>
+					<span class="am-item-details-link fa fa-angle-right"></span>
 				</a>
 			</div>
 		</div>
-	</div>
-	<div ng-hide="!itemTypeCounts">
-		<button ng-click="refresh()">Refresh</button>
 	</div>
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>
 <div class="am-footer">
 	<span class="am-powered-by">Powered by Ventyx Pty Ltd.</span>
-	<a href="#/settings" title="Settings">
-		<span class="am-settings-icon fa fa-cog fa-2x"></span>
-	</a>
+	<div class="am-home-icons">
+		<a ng-click="refresh()" title="Refresh">
+			<span class="fa fa-refresh fa-2x"></span>
+		</a>
+		<a href="#/settings" title="Settings">
+			<span class="fa fa-cog fa-2x"></span>
+		</a>
+	</div>
 </div>
