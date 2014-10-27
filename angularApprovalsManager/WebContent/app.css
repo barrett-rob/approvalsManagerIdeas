@@ -132,6 +132,26 @@
 	transform: translate(0, -50%);
 }
 
+.am-footer-link {
+	border: 1px inset #ccc;
+	text-align: center;
+	vertical-align: middle;
+	height: 100%;
+	float: right;
+}
+
+.am-approve-link {
+	width: 33%;
+}
+
+.am-reject-link {
+	width: 33%;
+}
+
+.am-other-link {
+	width: 34%;
+}
+
 .am-table {
 	padding: inherit;
 	width: 100%;

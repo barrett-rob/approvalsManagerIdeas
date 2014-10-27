@@ -3,9 +3,7 @@
 	<img class="am-hamburger" src="images/home-icon.svg">
 </div>
 <div class="am-content">
-	<div ng-hide="itemTypeCounts">
-		<p>No items matching your filters.</p>
-	</div>
+	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 	<div class="am-table">
 		<div class="am-row" ng-repeat="itemTypeCount in itemTypeCounts">
 			<div class="am-cell am-item-type">{{ itemTypeCount.itemTypeDescription }}</div>
@@ -17,7 +15,6 @@
 			</div>
 		</div>
 	</div>
-	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>
 <div class="am-footer">
 	<span class="am-powered-by">Powered by Ventyx Pty Ltd.</span>

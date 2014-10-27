@@ -21,7 +21,13 @@
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>
 <div class="am-footer">
-	<a class="am-approve-link" ng-click="approve()">Approve</a>
-	<a class="am-reject-link" ng-click="reject()">Reject</a>
-	<a class="am-other-link" ng-click="other()">Other...</a>
+	<div class="am-footer-link am-other-link">
+		<a ng-click="other()">Other...</a>
+	</div>
+	<div class="am-footer-link am-reject-link">
+		<a ng-click="reject()">Reject</a>
+	</div>
+	<div class="am-footer-link am-approve-link">
+		<a ng-click="approve()">Approve</a>
+	</div>
 </div>
