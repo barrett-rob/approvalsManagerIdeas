@@ -47,12 +47,20 @@
 .am-header {
 	height: 45px;
 	width: 100%;
-	padding: 7px;
+	margin: 0px;
+	padding: 0px;
 	background: #3498db;
 	color: #fff;
 	text-align: center;
 	font-size: 16pt;
-	vertical-align: middle;
+	position: relative;
+}
+
+.am-title {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .am-footer {
@@ -67,7 +75,7 @@
 }
 
 .am-content {
-	margin: 0px;
+	margin: 15px;
 	padding: 0px;
 }
 
@@ -81,13 +89,23 @@
 }
 
 .am-homeicon {
-	float: left;
 	color: #fff;
+	vertical-align: middle;
+	font-size: 22px;
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translate(0, -50%);
 }
 
 .am-homelink {
-	float: left;
+	font-size: 12pt;
 	color: #fff;
+	vertical-align: middle;
+	position: absolute;
+	left: 25px;
+	top: 50%;
+	transform: translate(0, -50%);
 }
 
 .am-table {

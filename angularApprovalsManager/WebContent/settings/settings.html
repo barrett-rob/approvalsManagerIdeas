@@ -1,43 +1,45 @@
 <div class="am-header">
 	<a href="#/home">
-		<span class="am-homeicon fa fa-arrow-left fa-lg"></span>
+		<span class="am-homeicon fa fa-angle-left"></span>
 		<span class="am-homelink">Home</span>
 	</a>
-	<span>Approvals Manager</span>
+	<span class="am-title">Approvals Manager</span>
 </div>
-<div>
-	<form name="settingsForm">
-		<div class="am-table">
-			<div class="am-row">
-				<label class="am-label">Ellipse URL:</label>
-				<input class="am-input" type="text" name="url" ng-model="url" required>
+<div class="am-content">
+	<div>
+		<form name="settingsForm">
+			<div class="am-table">
+				<div class="am-row">
+					<label class="am-label">Ellipse URL:</label>
+					<input class="am-input" type="text" name="url" ng-model="url" required>
+				</div>
+				<div class="am-row">
+					<label class="am-label">User Name:</label>
+					<input class="am-input" type="text" name="username" ng-model="credentials.username" required>
+				</div>
+				<div class="am-row">
+					<label class="am-label">Password:</label>
+					<input class="am-input" type="password" name="password" ng-model="credentials.password">
+				</div>
+				<div class="am-row">
+					<label class="am-label">District:</label>
+					<input class="am-input" type="text" name="district" ng-model="credentials.scope">
+				</div>
+				<div class="am-row">
+					<label class="am-label">Position:</label>
+					<input class="am-input" type="text" name="position" ng-model="credentials.position">
+				</div>
+				<div class="am-row">
+					<label class="am-label">Employee Id:</label>
+					<input class="am-input" type="text" name="employeeId" ng-model="filters.employeeId">
+				</div>
 			</div>
-			<div class="am-row">
-				<label class="am-label">User Name:</label>
-				<input class="am-input" type="text" name="username" ng-model="credentials.username" required>
+			<div>
+				<button ng-click="validate()">Validate</button>
 			</div>
-			<div class="am-row">
-				<label class="am-label">Password:</label>
-				<input class="am-input" type="password" name="password" ng-model="credentials.password">
-			</div>
-			<div class="am-row">
-				<label class="am-label">District:</label>
-				<input class="am-input" type="text" name="district" ng-model="credentials.scope">
-			</div>
-			<div class="am-row">
-				<label class="am-label">Position:</label>
-				<input class="am-input" type="text" name="position" ng-model="credentials.position">
-			</div>
-			<div class="am-row">
-				<label class="am-label">Employee Id:</label>
-				<input class="am-input" type="text" name="employeeId" ng-model="filters.employeeId">
-			</div>
-		</div>
-		<div>
-			<button ng-click="validate()">Validate</button>
-		</div>
-	</form>
-	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
+		</form>
+		<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
+	</div>
 </div>
 <div class="am-footer">
 	<span class="am-poweredby">Powered by Ventyx Pty Ltd.</span>
