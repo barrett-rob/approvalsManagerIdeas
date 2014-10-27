@@ -8,6 +8,7 @@
 	<div class="am-title">Settings</div>
 </div>
 <div class="am-content">
+	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 	<form name="settingsForm">
 		<div class="am-table">
 			<div class="am-row am-row-nounderline">
@@ -36,7 +37,6 @@
 			</div>
 		</div>
 	</form>
-	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>
 <div class="am-footer">
 	<div class="am-footer-link am-validate-link">

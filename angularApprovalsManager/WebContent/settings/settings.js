@@ -11,7 +11,7 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 	[ '$scope', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'getFilters', 'setFilters', 'executeLogin', '$timeout', 
 	function($scope, poke, getCredentials, setCredentials, getUrl, setUrl, getFilters, setFilters, executeLogin, $timeout) {
 	// set up alerts
-	$scope.alerts = [ { type: 'info', msg: "Don't forget to validate your settings." } ]
+	$scope.alerts = []
 	// set up credentials
 	var oldcredentials = getCredentials()
 	$scope.credentials = oldcredentials
