@@ -39,11 +39,12 @@ angular.module('ApprovalsManagerService', [ 'RIAHttpService' ])
 						for (var i in dtos) {
 							var dto = dtos[i]
 							var itemType = dto.tran877Type
+							var itemDescription = DESCRIPTIONS[itemType]
 							var o = itemTypeCounts[itemType]
 							if (o) {
 								o.count = o.count + 1
 							} else {
-								itemTypeCounts[itemType] = { 'itemType': itemType, 'count': 1 }
+								itemTypeCounts[itemType] = { 'itemType': itemType, 'itemDescription': itemDescription, 'count': 1 }
 							}
 						}
 					}
@@ -91,3 +92,35 @@ angular.module('ApprovalsManagerService', [ 'RIAHttpService' ])
 		)
 	}
 }])
+
+// this is a temporary hack until we get
+// a service to deliver these descriptions
+var DESCRIPTIONS = {
+	'AI': 'Auto Invoice Item', 
+	'CO': 'Contract', 
+	'CI': 'Contract Invoice Item', 
+	'CR': 'Contract Overrun', 
+	'VA': 'Contract Valuations', 
+	'CV': 'Contract Variant', 
+	'CD': 'Credit/Debit Note', 
+	'FI': 'FMS Indent', 
+	'IF': 'Field Release Invoice Item', 
+	'GA': 'GPA Agreements', 
+	'GR': 'GPA Request for Quotes', 
+	'GI': 'Goods Invoice Item', 
+	'IP': 'Indent History', 
+	'IN': 'Invoice', 
+	'IR': 'Issue Requisition', 
+	'MI': 'Mixed Invoice Item', 
+	'NI': 'Non-order Invoice Item', 
+	'OI': 'Other Invoice Item', 
+	'PW': 'Parent Work Order', 
+	'PO': 'Purchase Order', 
+	'PR': 'Purchase Requisition', 
+	'RP': 'Recurring Payment', 
+	'FP': 'Request For Quote', 
+	'RI': 'Retention Invoice Item', 
+	'SI': 'Service Order Invoice Item', 
+	'SC': 'Supply Customer Transfer', 
+	'WO': 'Work Order', 
+}

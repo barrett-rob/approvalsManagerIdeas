@@ -33,6 +33,7 @@ describe('approvalsManager.home module', function() {
 			httpBackend.flush()
 			expect(scope.itemTypeCounts).toBeDefined()
 			expect(scope.itemTypeCounts['VA'].count).toEqual(2)
+			expect(scope.itemTypeCounts['VA'].itemDescription).toBeDefined()
 		}))
 
   })
