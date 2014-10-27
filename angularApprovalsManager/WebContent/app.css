@@ -74,7 +74,7 @@
 .am-footer {
 	height: 55px;
 	width: 100%;
-	margin: 0px;
+	margin: 15px 0px 0px 0px;
 	padding: 0px;
 	text-align: center;
 	background: #e0e5e4;
@@ -86,7 +86,7 @@
 }
 
 .am-content {
-	margin: 15px;
+	margin: 15px 15px 45px 15px;
 	padding: 0px;
 }
 
