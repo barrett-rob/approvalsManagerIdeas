@@ -111,23 +111,18 @@
 	padding: 10px;
 }
 
-.am-home-icon {
+.am-home-link {
+	font-size: 12pt;
 	color: #fff;
-	vertical-align: middle;
-	font-size: 22px;
 	position: absolute;
 	left: 10px;
 	top: 50%;
 	transform: translate(0, -50%);
 }
 
-.am-home-link {
-	font-size: 12pt;
-	color: #fff;
-	position: absolute;
-	left: 25px;
-	top: 50%;
-	transform: translate(0, -50%);
+.am-home-link a {
+	font: inherit;
+	color: inherit;
 }
 
 .am-validate-link {
@@ -174,10 +169,6 @@
 .am-item-details {
 	width: 5%;
 	text-align: right;
-}
-
-.am-item-details-link {
-	font-size: 1.1em !important;
 }
 
 .am-transaction-key {
