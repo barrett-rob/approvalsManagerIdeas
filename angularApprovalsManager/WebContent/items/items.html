@@ -1,13 +1,25 @@
-<div>
+<div class="am-header">
+	<a href="#/home">
+		<span class="am-home-icon fa fa-angle-left"></span>
+		<span class="am-home-link">Home</span>
+	</a>
+	<span class="am-title">Items</span>
+</div>
+<div class="am-content">
 	<div ng-hide="items">
 		<p>No items matching your filters.</p>
 	</div>
 	<div class="am-table">
 		<div class="am-row" ng-repeat="item in items">
-			<span class="am-cell am-transactionKey">{{ item.transactionKey }}</span>
-			<span class="am-cell am-descriptioon">{{ item.description }}</span>
-			<span class="am-cell am-amount">{{ item.amountToAuthorise }}</span>
+			<span class="am-cell am-transaction-key">{{ item.transactionKey }}</span>
+			<span class="am-cell am-transaction-description">{{ item.description }}</span>
+			<span class="am-cell am-transaction-amount">{{ item.amountToAuthorise }}</span>
 		</div>
 	</div>
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
+</div>
+<div class="am-footer">
+	<a class="am-approve-link" ng-click="approve()">Approve</a>
+	<a class="am-reject-link" ng-click="reject()">Reject</a>
+	<a class="am-other-link" ng-click="other()">Other...</a>
 </div>

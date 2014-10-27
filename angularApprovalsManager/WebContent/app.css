@@ -88,7 +88,7 @@
 	padding: 0px;
 }
 
-.am-poweredby {
+.am-powered-by {
 	font-size: smaller;
 	position: absolute;
 	left: 10px;
@@ -96,7 +96,7 @@
 	transform: translate(0, -50%);
 }
 
-.am-settingsicon {
+.am-settings-icon {
 	color: #0072bd;
 	position: absolute;
 	right: 10px;
@@ -104,7 +104,7 @@
 	transform: translate(0, -50%);
 }
 
-.am-homeicon {
+.am-home-icon {
 	color: #fff;
 	vertical-align: middle;
 	font-size: 22px;
@@ -114,7 +114,7 @@
 	transform: translate(0, -50%);
 }
 
-.am-homelink {
+.am-home-link {
 	font-size: 12pt;
 	color: #fff;
 	position: absolute;
@@ -123,8 +123,7 @@
 	transform: translate(0, -50%);
 }
 
-.am-validatelink {
-	font-size: 12pt;
+.am-validate-link {
 	position: absolute;
 	right: 10px;
 	top: 50%;
@@ -156,29 +155,29 @@
 	vertical-align: middle;
 }
 
-.am-itemType {
+.am-item-type {
 	width: 70%;
 }
 
-.am-itemCount {
+.am-item-count {
 	width: 10%;
 	text-align: right;
 }
 
-.am-itemDetails {
+.am-item-details {
 	width: 10%;
 	text-align: right;
 }
 
-.am-transactionKey {
+.am-transaction-key {
 	width: 25%;
 }
 
-.am-description {
+.am-transaction-description {
 	width: 50%;
 }
 
-.am-amount {
+.am-transaction-amount {
 	width: 25%;
 	text-align: right;
 }
