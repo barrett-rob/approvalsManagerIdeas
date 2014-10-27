@@ -10,11 +10,8 @@
 <div class="am-content">
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 	<form name="settingsForm">
+		<div class="am-subheading">Ellipse</div>
 		<div class="am-table">
-			<div class="am-row am-row-nounderline">
-				<label class="am-label">Ellipse URL:</label>
-				<input class="am-input" type="text" name="url" ng-model="url" required>
-			</div>
 			<div class="am-row am-row-nounderline">
 				<label class="am-label">User Name:</label>
 				<input class="am-input" type="text" name="username" ng-model="credentials.username" required>
@@ -32,6 +29,13 @@
 				<input class="am-input" type="text" name="position" ng-model="credentials.position">
 			</div>
 			<div class="am-row am-row-nounderline">
+				<label class="am-label">URL:</label>
+				<input class="am-input" type="text" name="url" ng-model="url" required>
+			</div>
+		</div>
+		<div class="am-subheading">Filters</div>
+		<div class="am-table">
+			<div class="am-row am-row-nounderline">
 				<label class="am-label">Employee Id:</label>
 				<input class="am-input" type="text" name="employeeId" ng-model="filters.employeeId">
 			</div>
@@ -40,6 +44,6 @@
 </div>
 <div class="am-footer">
 	<div class="am-footer-link am-validate-link">
-		<a ng-click="validate()">Validate</a>
+		<a ng-click="validate()">Save</a>
 	</div>
 </div>
