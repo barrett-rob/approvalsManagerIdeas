@@ -18,7 +18,7 @@ angular.module('approvalsManager.items', [ 'ngRoute', 'ApprovalsManagerService' 
 		return
 	}
 	// set up alerts
-	$scope.alerts = [ { type: 'info', msg: "Retrieving items of type " + $scope.itemType } ]
+	$scope.alerts = []
 	// retrieve items for item type
 	self.getItems = function() {
 		getItems($scope.itemType,

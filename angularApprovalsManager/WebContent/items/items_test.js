@@ -23,7 +23,6 @@ describe('approvalsManager.items module', function() {
 			expect(ctrlr).toBeDefined()
 			// check that there is an alerts object
 			expect(scope.alerts).toBeDefined()
-			expect(scope.alerts[0].type).toEqual('info')
 			// log in
 			$httpBackend.expectPOST().respond(SUCCESFUL_LOGIN_RESPONSE)
 			executeLogin()
