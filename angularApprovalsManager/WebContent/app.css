@@ -49,14 +49,14 @@
 	width: 100%;
 	margin: 0px;
 	padding: 0px;
+	text-align: center;
 	background: #3498db;
 	color: #fff;
-	text-align: center;
-	font-size: 16pt;
 	position: relative;
 }
 
 .am-title {
+	font-size: 16pt;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -73,11 +73,11 @@
 .am-footer {
 	height: 55px;
 	width: 100%;
+	margin: 0px;
+	padding: 0px;
 	text-align: center;
 	background: #e0e5e4;
 	color: #0072bd;
-	margin: 0px;
-	padding: 0px;
 	box-shadow: 0px 4px 2px -2px #ccc;
 	border-top: 1px solid #ccc;
 	position: relative;
@@ -91,9 +91,9 @@
 .am-poweredby {
 	font-size: smaller;
 	position: absolute;
-	left: 50%;
+	left: 10px;
 	top: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(0, -50%);
 }
 
 .am-settingsicon {
@@ -117,9 +117,16 @@
 .am-homelink {
 	font-size: 12pt;
 	color: #fff;
-	vertical-align: middle;
 	position: absolute;
 	left: 25px;
+	top: 50%;
+	transform: translate(0, -50%);
+}
+
+.am-validatelink {
+	font-size: 12pt;
+	position: absolute;
+	right: 10px;
 	top: 50%;
 	transform: translate(0, -50%);
 }
@@ -128,48 +135,51 @@
 	padding: inherit;
 	width: 100%;
 	display: table;
+	border-collapse: collapse;
 }
 
 .am-row {
 	width: 100%;
 	display: table-row;
+	border-bottom: 1px solid #ccc;
+}
+
+.am-row-nounderline {
+	border-bottom: 0px !important;
+}
+
+.am-cell {
+	height: 3em;
+	margin: 0px;
+	padding: 5px;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .am-itemType {
-	padding: 5px;
 	width: 70%;
-	display: table-cell;
 }
 
 .am-itemCount {
-	padding: 5px;
 	width: 10%;
-	display: table-cell;
 	text-align: right;
 }
 
 .am-itemDetails {
-	padding: 5px;
 	width: 10%;
-	display: table-cell;
+	text-align: right;
 }
 
 .am-transactionKey {
-	padding: 5px;
 	width: 25%;
-	display: table-cell;
 }
 
 .am-description {
-	padding: 5px;
 	width: 50%;
-	display: table-cell;
 }
 
 .am-amount {
-	padding: 5px;
 	width: 25%;
-	display: table-cell;
 	text-align: right;
 }
 

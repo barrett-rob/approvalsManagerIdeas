@@ -4,9 +4,9 @@
 	</div>
 	<div class="am-table">
 		<div class="am-row" ng-repeat="item in items">
-			<span class="am-transactionKey">{{ item.transactionKey }}</span>
-			<span class="am-descriptioon">{{ item.description }}</span>
-			<span class="am-amount">{{ item.amountToAuthorise }}</span>
+			<span class="am-cell am-transactionKey">{{ item.transactionKey }}</span>
+			<span class="am-cell am-descriptioon">{{ item.description }}</span>
+			<span class="am-cell am-amount">{{ item.amountToAuthorise }}</span>
 		</div>
 	</div>
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
