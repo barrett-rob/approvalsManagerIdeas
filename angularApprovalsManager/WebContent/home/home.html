@@ -1,3 +1,6 @@
+<div class="am-header">
+	<span>Approvals Manager</span>
+</div>
 <div>
 	<div ng-hide="itemTypeCounts">
 		<p>No items matching your filters.</p>
@@ -13,4 +16,10 @@
 		<button ng-click="refresh()">Refresh</button>
 	</div>
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
+</div>
+<div class="am-footer">
+	<span class="am-poweredby">Powered by Ventyx Pty Ltd.</span>
+	<a href="#/settings" title="Settings">
+		<span class="am-settingsicon fa fa-cog fa-2x"></span>
+	</a>
 </div>

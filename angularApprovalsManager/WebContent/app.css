@@ -41,6 +41,7 @@
 	background: #fff;
 	box-shadow: 4px 4px 2px 2px #ccc;
 	padding: 0px;
+	border: 1px #ccc;
 }
 
 .am-header {
@@ -58,22 +59,25 @@
 	height: 55px;
 	width: 100%;
 	text-align: center;
-	background: #3498db;
-	vertical-align: bottom;
+	background: #e0e5e4;
+	color: 0072bd;
 	padding: 15px;
+	box-shadow: 0px 4px 2px -2px #ccc;
+	border-top: 1px solid #ccc;
 }
 
 .am-content {
-	padding: 15px;
-}
-
-.am-content div, .am-content button {
-	margin: 5px;
+	margin: 0px;
+	padding: 0px;
 }
 
 .am-poweredby {
-	color: #fff;
+	color: inherit;
 	font-size: smaller;
+}
+
+.am-settingsicon {
+	float: right;
 }
 
 .am-table {
