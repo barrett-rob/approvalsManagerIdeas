@@ -60,7 +60,7 @@
 	width: 100%;
 	text-align: center;
 	background: #e0e5e4;
-	color: 0072bd;
+	color: #0072bd;
 	padding: 15px;
 	box-shadow: 0px 4px 2px -2px #ccc;
 	border-top: 1px solid #ccc;
@@ -72,12 +72,22 @@
 }
 
 .am-poweredby {
-	color: inherit;
 	font-size: smaller;
 }
 
 .am-settingsicon {
 	float: right;
+	color: #0072bd;
+}
+
+.am-homeicon {
+	float: left;
+	color: #fff;
+}
+
+.am-homelink {
+	float: left;
+	color: #fff;
 }
 
 .am-table {
