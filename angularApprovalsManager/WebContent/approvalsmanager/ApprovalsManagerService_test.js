@@ -33,7 +33,7 @@ describe('ApprovalsManagerService tests', function() {
 			getItemTypeCounts(function(itemTypeCounts) {
 				expect(itemTypeCounts).toBeDefined()
 				expect(itemTypeCounts['VA'].count).toEqual(2)
-				expect(itemTypeCounts['VA'].itemDescription).toBeDefined()
+				expect(itemTypeCounts['VA'].itemTypeDescription).toBeDefined()
 			})
 			httpBackend.flush()
 		})

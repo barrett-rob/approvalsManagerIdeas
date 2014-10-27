@@ -4,7 +4,7 @@
 	</div>
 	<div class="am-table">
 		<div class="am-row" ng-repeat="itemTypeCount in itemTypeCounts">
-			<div class="am-itemType">{{ itemTypeCount.itemType }}</div>
+			<div class="am-itemType">{{ itemTypeCount.itemTypeDescription }}</div>
 			<div class="am-itemCount">{{ itemTypeCount.count }}</div>
 			<div class="am-itemDetails"><a href="#/items?itemType={{ itemTypeCount.itemType }}">Details</a></div>
 		</div>

@@ -39,12 +39,12 @@ angular.module('ApprovalsManagerService', [ 'RIAHttpService' ])
 						for (var i in dtos) {
 							var dto = dtos[i]
 							var itemType = dto.tran877Type
-							var itemDescription = DESCRIPTIONS[itemType]
+							var itemTypeDescription = DESCRIPTIONS[itemType]
 							var o = itemTypeCounts[itemType]
 							if (o) {
 								o.count = o.count + 1
 							} else {
-								itemTypeCounts[itemType] = { 'itemType': itemType, 'itemDescription': itemDescription, 'count': 1 }
+								itemTypeCounts[itemType] = { 'itemType': itemType, 'itemTypeDescription': itemTypeDescription, 'count': 1 }
 							}
 						}
 					}
