@@ -13,23 +13,33 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 	// init
 	$scope.alerts = []
 	$scope.itemTypeCounts = undefined
-	$scope.progress = function() {
+	$scope.showProgress = function() {
 		var modalInstance = $modal.open({
 			templateUrl: 'dialogs/progressDialog.html',
 			controller: 'progressDialogController',
+			resolve: {
+				getProgress: function() {
+					return $scope.getProgress
+				}
+			}
 		});
 		modalInstance.result.then(
 			function() {
 				// ok
-			},
-			function() {
-				// cancel
-			})
+				$scope.progress = 0
+			}
+		)
+	}
+	$scope.progress = 70
+	$scope.getProgress = function() {
+		return $scope.progress
 	}
 	$scope.refresh = function() {
 		self.refresh()
 	}
 	self.refresh = function() {
+		$scope.progress = 5
+		$scope.showProgress()
 		self.login()
 	}
 	self.getApprovalCounts = function() {
@@ -44,18 +54,17 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 					// clear messages after a bit
 					$scope.alerts = []
 				}, 1000)
+				$scope.progress = 100
 				return
 			}
 			// nothing in itemTypeCounts
 			$scope.itemTypeCounts = undefined
+			$scope.progress = 100
 		})
 	}
 	self.login = function() {
-		var alert = { type: 'info', msg: "Connecting to Ellipse..." }
-		$scope.alerts.push(alert)
 		var doGetApprovalCounts = function(response) {
-			// login success
-			alert.msg = alert.msg + '  done'
+			$scope.progress = 50
 			$timeout(self.getApprovalCounts, 250);
 		}
 		if (hasConnectionId()) {
@@ -64,6 +73,7 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 			executeLogin(
 				doGetApprovalCounts, 
 				function(response) {
+					$scope.progress = 100
 					$scope.alerts.push({ type: 'danger', msg: "Connection failed, please check settings" })
 				}
 			)
