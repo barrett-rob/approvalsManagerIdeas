@@ -15,9 +15,8 @@ angular.module('approvalsManager.dialogs', [ 'ui.bootstrap' ])
 		return $scope.progress
 	}
 	$scope.$watch('progress', function(progress) {
-		console.log(progress)
 		if (progress >= 100) {
-			$modalInstance.close()
+			$timeout($modalInstance.close, 250)
 		}
 	})
 	$scope.ok = function() {

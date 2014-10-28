@@ -1,6 +1,12 @@
 'use strict';
 
-angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACredentialsService', 'RIAHttpService', 'ApprovalsManagerService' ])
+angular.module('approvalsManager.settings', [ 
+	'ngRoute', 
+	'RIAURLService', 
+	'RIACredentialsService', 
+	'RIAHttpService', 
+	'ApprovalsManagerService',
+	'ui.bootstrap' ])
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/settings', {
 		templateUrl: 'settings/settings.html',
@@ -8,8 +14,30 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 	});
 }])
 .controller('settingsController', 
-	[ '$scope', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'getFilters', 'setFilters', 'executeLogin', '$timeout', 
-	function($scope, poke, getCredentials, setCredentials, getUrl, setUrl, getFilters, setFilters, executeLogin, $timeout) {
+	[ '$scope', '$modal', '$timeout', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'getFilters', 'setFilters', 'executeLogin', 
+	function($scope, $modal, $timeout, poke, getCredentials, setCredentials, getUrl, setUrl, getFilters, setFilters, executeLogin) {
+	// set up progress dialog
+	$scope.showProgress = function() {
+		var modalInstance = $modal.open({
+			templateUrl: 'dialogs/progressDialog.html',
+			controller: 'progressDialogController',
+			resolve: {
+				getProgress: function() {
+					return $scope.getProgress
+				}
+			}
+		});
+		modalInstance.result.then(
+			function() {
+				// ok
+				$scope.progress = 0
+			}
+		)
+	}
+	$scope.progress = 0
+	$scope.getProgress = function() {
+		return $scope.progress
+	}
 	// set up alerts
 	$scope.alerts = []
 	// set up credentials
@@ -21,43 +49,47 @@ angular.module('approvalsManager.settings', [ 'ngRoute', 'RIAURLService', 'RIACr
 	// set up filters
 	$scope.filters = getFilters()
 	$scope.validate = function() {
-		console.log('validate')
-		// validate url
+		$scope.alerts = []
+		$scope.progress = 5
+		$scope.showProgress()
+		$timeout(self.validateURL, 500);
+	}
+	self.validateURL = function() {
 		var url = $scope.url
 		poke(url, function(success) {
 			if (success) {
-				console.log('url is valid, checking credentials by logging in')
-				$scope.alerts = [ { type: 'success', msg: 'Ellipse URL is valid.' } ]
-				// validate credentials
-				var newcredentials = {}
-				angular.copy($scope.credentials, newcredentials)
-				setCredentials(newcredentials)
-				executeLogin(
-					function(response) {
-						// success
-						console.log('credentials are valid')
-						$scope.alerts.push( { type: 'success', msg: 'Login succeeded, these settings have been saved.' } )
-						// validate filters?
-						setFilters($scope.filters)
-						$timeout(function() {
-							// clear messages after a bit
-							$scope.alerts = []
-						}, 1000)
-					}, 
-					function(response) {
-						console.log('credentials are NOT valid')
-						var message = response.messages.errors.message
-						$scope.alerts.push( { type: 'danger', msg: message.text } )
-						$scope.alerts.push( { type: 'danger', msg: 'Login failed, these settings have not been saved.' } )
-						setCredentials(oldcredentials)
-					}
-				)
+				$timeout(self.validateCredentials, 500)
 				setUrl(url)
+				$scope.progress = 33
 			} else {
-				console.log('url is NOT valid: ' + url)
 				$scope.alerts = [ { type: 'danger', msg: 'Ellipse URL is not valid, these settings have not been saved.' } ]
 				setUrl(oldurl)
+				$scope.progress = 100
 			}
 		})
+	}
+	self.validateCredentials = function() {
+		var newcredentials = {}
+		angular.copy($scope.credentials, newcredentials)
+		setCredentials(newcredentials)
+		executeLogin(
+			function(response) {
+				// success
+				$timeout(self.validateFilters, 500)
+				$scope.progress = 66
+			}, 
+			function(response) {
+				console.log('credentials are NOT valid')
+				var message = response.messages.errors.message
+				$scope.alerts.push( { type: 'danger', msg: message.text } )
+				$scope.alerts.push( { type: 'danger', msg: 'Login failed, these settings have not been saved.' } )
+				setCredentials(oldcredentials)
+				$scope.progress = 100
+			}
+		)
+	}
+	self.validateFilters = function() {
+		setFilters($scope.filters)
+		$scope.progress = 100
 	}
 }])

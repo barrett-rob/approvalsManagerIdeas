@@ -12,6 +12,7 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 
 	// init
 	$scope.alerts = []
+	// set up progress dialog
 	$scope.itemTypeCounts = undefined
 	$scope.showProgress = function() {
 		var modalInstance = $modal.open({
@@ -30,7 +31,7 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 			}
 		)
 	}
-	$scope.progress = 70
+	$scope.progress = 0
 	$scope.getProgress = function() {
 		return $scope.progress
 	}
@@ -43,13 +44,10 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 		self.login()
 	}
 	self.getApprovalCounts = function() {
-		var alert = { type: 'info', msg: "Checking for approval items..." }
-		$scope.alerts.push(alert)
 		getItemTypeCounts(function(itemTypeCounts) {
 			for (var key in itemTypeCounts) {
 				// something in itemTypeCounts
 				$scope.itemTypeCounts = itemTypeCounts
-				alert.msg = alert.msg + ' done'
 				$timeout(function() {
 					// clear messages after a bit
 					$scope.alerts = []
