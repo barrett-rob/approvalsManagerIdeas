@@ -10,27 +10,20 @@ angular.module('approvalsManager.items', [
 		controller: 'itemsController'
 	});
 }])
-.controller('itemsController', 
-	[ '$scope', '$routeParams', '$timeout', '$modal', 'getItems',
-	function($scope, $routeParams, $timeout, $modal, getItems) {
-	// set up progress dialog
-	$scope.showProgress = function() {
-		var modalInstance = $modal.open({
-			templateUrl: 'dialogs/progressDialog.html',
-			controller: 'progressDialogController',
-			resolve: {
-				getProgress: function() {
-					return $scope.getProgress
-				}
-			}
-		});
-		modalInstance.result.then(
-			function() {
-				// ok
-				$scope.progress = 0
-			}
-		)
-	}
+.controller('itemsController', [ 
+	'$scope', 
+	'$routeParams', 
+	'$timeout', 
+	'showProgress', 
+	'getItems',
+	function(
+		$scope, 
+		$routeParams, 
+		$timeout, 
+		showProgress, 
+		getItems
+	) {
+	// init
 	$scope.progress = 0
 	$scope.getProgress = function() {
 		return $scope.progress
@@ -47,7 +40,7 @@ angular.module('approvalsManager.items', [
 	// retrieve items for item type
 	self.getItems = function() {
 		$scope.progress = 5
-		$scope.showProgress()
+		showProgress($scope.getProgress)
 		getItems($scope.itemType,
 			function(items) {
 				$scope.items = items

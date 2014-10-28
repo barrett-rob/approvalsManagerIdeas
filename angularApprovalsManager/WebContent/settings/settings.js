@@ -13,27 +13,32 @@ angular.module('approvalsManager.settings', [
 		controller: 'settingsController'
 	});
 }])
-.controller('settingsController', 
-	[ '$scope', '$modal', '$timeout', 'poke', 'getCredentials', 'setCredentials', 'getUrl', 'setUrl', 'getFilters', 'setFilters', 'executeLogin', 
-	function($scope, $modal, $timeout, poke, getCredentials, setCredentials, getUrl, setUrl, getFilters, setFilters, executeLogin) {
-	// set up progress dialog
-	$scope.showProgress = function() {
-		var modalInstance = $modal.open({
-			templateUrl: 'dialogs/progressDialog.html',
-			controller: 'progressDialogController',
-			resolve: {
-				getProgress: function() {
-					return $scope.getProgress
-				}
-			}
-		});
-		modalInstance.result.then(
-			function() {
-				// ok
-				$scope.progress = 0
-			}
-		)
-	}
+.controller('settingsController', [ 
+	'$scope', 
+	'$timeout', 
+	'poke', 
+	'getCredentials', 
+	'setCredentials', 
+	'getUrl', 
+	'setUrl', 
+	'getFilters', 
+	'setFilters', 
+	'executeLogin', 
+	'showProgress', 
+	function(
+		$scope, 
+		$timeout, 
+		poke, 
+		getCredentials, 
+		setCredentials, 
+		getUrl, 
+		setUrl, 
+		getFilters, 
+		setFilters, 
+		executeLogin, 
+		showProgress
+	) {
+	// init
 	$scope.progress = 0
 	$scope.getProgress = function() {
 		return $scope.progress
@@ -51,7 +56,7 @@ angular.module('approvalsManager.settings', [
 	$scope.validate = function() {
 		$scope.alerts = []
 		$scope.progress = 5
-		$scope.showProgress()
+		showProgress($scope.getProgress)
 		$timeout(self.validateURL, 500);
 	}
 	self.validateURL = function() {

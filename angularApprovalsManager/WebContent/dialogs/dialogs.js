@@ -23,3 +23,25 @@ angular.module('approvalsManager.dialogs', [ 'ui.bootstrap' ])
 		$modalInstance.close()
 	}
 }])
+.factory('showProgress', [ '$modal', function($modal) {
+	// set up progress dialog
+	return function(
+		getProgressFunction // function, returns value out of 100 for progress bar
+	) {
+		var modalInstance = $modal.open({
+			templateUrl: 'dialogs/progressDialog.html',
+			controller: 'progressDialogController',
+			size: 'sm',
+			resolve: {
+				getProgress: function() {
+					return getProgressFunction
+				}
+			}
+		});
+		modalInstance.result.then(
+			function() {
+				// clean up?
+			}
+		)
+	}
+}])

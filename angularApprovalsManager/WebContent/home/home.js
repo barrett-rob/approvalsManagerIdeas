@@ -7,30 +7,24 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 		controller: 'homeController'
 	})
 }])
-.controller('homeController', ['$scope', '$timeout', '$modal', 'executeLogin', 'getItemTypeCounts', 'hasConnectionId',
-	function($scope, $timeout, $modal, executeLogin, getItemTypeCounts, hasConnectionId) {
-
+.controller('homeController', [
+	'$scope', 
+	'$timeout', 
+	'executeLogin', 
+	'getItemTypeCounts', 
+	'hasConnectionId', 
+	'showProgress',
+	function(
+		$scope, 
+		$timeout, 
+		executeLogin, 
+		getItemTypeCounts, 
+		hasConnectionId, 
+		showProgress
+	) {
 	// init
 	$scope.alerts = []
-	// set up progress dialog
 	$scope.itemTypeCounts = undefined
-	$scope.showProgress = function() {
-		var modalInstance = $modal.open({
-			templateUrl: 'dialogs/progressDialog.html',
-			controller: 'progressDialogController',
-			resolve: {
-				getProgress: function() {
-					return $scope.getProgress
-				}
-			}
-		});
-		modalInstance.result.then(
-			function() {
-				// ok
-				$scope.progress = 0
-			}
-		)
-	}
 	$scope.progress = 0
 	$scope.getProgress = function() {
 		return $scope.progress
@@ -40,7 +34,7 @@ angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'Approval
 	}
 	self.refresh = function() {
 		$scope.progress = 5
-		$scope.showProgress()
+		showProgress($scope.getProgress)
 		self.login()
 	}
 	self.getApprovalCounts = function() {
