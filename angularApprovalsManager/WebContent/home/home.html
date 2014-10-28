@@ -1,6 +1,8 @@
 <div class="am-header">
 	<div class="am-title">Approvals Manager</div>
-	<img class="am-hamburger" src="images/home-icon.svg">
+	<div class="am-home-top-right-icons">
+		<img src="images/home-icon.svg">
+	</div>
 </div>
 <div class="am-content">
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
@@ -17,8 +19,8 @@
 	</div>
 </div>
 <div class="am-footer">
-	<span class="am-powered-by">Powered by Ventyx Pty Ltd.</span>
-	<div class="am-home-icons">
+	<div class="am-powered-by">Powered by Ventyx Pty Ltd.</div>
+	<div class="am-home-bottom-right-icons">
 		<a ng-click="refresh()" title="Refresh">
 			<span class="fa fa-refresh fa-2x"></span>
 		</a>
