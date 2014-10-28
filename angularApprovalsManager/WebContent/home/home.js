@@ -1,18 +1,31 @@
 'use strict';
 
-angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'ApprovalsManagerService' ])
+angular.module('approvalsManager.home', [ 'ngRoute', 'RIAHttpService', 'ApprovalsManagerService', 'ui.bootstrap' ])
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/home', {
 		templateUrl: 'home/home.html',
 		controller: 'homeController'
 	})
 }])
-.controller('homeController', ['$scope', '$timeout', 'executeLogin', 'getItemTypeCounts', 'hasConnectionId',
-	function($scope, $timeout, executeLogin, getItemTypeCounts, hasConnectionId) {
+.controller('homeController', ['$scope', '$timeout', '$modal', 'executeLogin', 'getItemTypeCounts', 'hasConnectionId',
+	function($scope, $timeout, $modal, executeLogin, getItemTypeCounts, hasConnectionId) {
 
 	// init
 	$scope.alerts = []
 	$scope.itemTypeCounts = undefined
+	$scope.progress = function() {
+		var modalInstance = $modal.open({
+			templateUrl: 'dialogs/progressDialog.html',
+			controller: 'progressDialogController',
+		});
+		modalInstance.result.then(
+			function() {
+				// ok
+			},
+			function() {
+				// cancel
+			})
+	}
 	$scope.refresh = function() {
 		self.refresh()
 	}
